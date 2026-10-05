@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/assets/favicon.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png" sizes="180x180">
+<title>Sample mockups — CameraAccessTrust</title>
+<meta name="description" content="Illustrative sample mockups of the planned CameraAccessTrust receipt lookup, agency directory and transparency report.">
+<link rel="stylesheet" href="shared.css">
+<style>
+  .gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+  .g-card {
+    background: var(--white); border: 1px solid var(--rule); border-radius: 12px;
+    overflow: hidden; display: flex; flex-direction: column;
+    transition: box-shadow .15s, border-color .15s;
+  }
+  .g-card:hover { border-color: var(--accent); box-shadow: 0 10px 28px rgba(15,27,45,.08); text-decoration: none; }
+  .g-card .preview {
+    height: 140px; background: var(--navy); display: flex; align-items: center; justify-content: center;
+    color: var(--onnavy); font-size: 13px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
+    position: relative;
+  }
+  .g-card .preview svg { opacity: 0.9; }
+  .g-card .body { padding: 20px; flex: 1; display: flex; flex-direction: column; }
+  .g-card h2 { font-size: 20px; color: var(--navy); margin-bottom: 8px; }
+  .g-card p { font-size: 15px; color: var(--body); margin-bottom: 16px; flex: 1; }
+  .g-card .cta { font-weight: 700; font-size: 14px; color: var(--accent); }
+  @media (max-width: 900px) { .gallery { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<div class="sample-banner">Sample mockup — illustrative only. Not live. All agencies, people and data are fictional.</div>
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a class="logo" href="/"><img class="logo-mark" src="/assets/logo.svg" width="28" height="28" alt="" aria-hidden="true"><span class="logo-text">Camera<span>Access</span>Trust</span></a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="/#how">How it works</a>
+      <a href="/#receipt">Receipts</a>
+      <a href="/#who">Who it’s for</a>
+      <a href="/#why">Why it matters</a>
+      <a href="/#faq">FAQ</a>
+      <a href="/#contact">Contact</a>
+    </nav>
+    <span class="pill">Patent pending</span>
+    <a class="btn" href="/#contact">Ask about a pilot</a>
+  </div>
+</header>
+<main>
+  <section class="page-hero">
+    <div class="wrap">
+      <div class="kicker">Planned product · sample mockups</div>
+      <h1>See what the portal may look like.</h1>
+      <p class="lead">These pages are interactive-looking samples of features we plan to build. Nothing here is live. Agencies, people and data are fictional.</p>
+      <span class="sample-tag">Illustrative only · Not a product demo of live data</span>
+    </div>
+  </section>
+  <section>
+    <div class="wrap">
+      <div class="gallery">
+        <a class="g-card" href="/samples/receipt-lookup/">
+          <div class="preview" aria-hidden="true">
+            <svg width="64" height="64" viewBox="0 0 64 64" fill="none"><rect x="14" y="8" width="36" height="48" rx="4" stroke="#0E7C86" stroke-width="2.5"/><path d="M22 22h20M22 30h20M22 38h12" stroke="#B8C4D4" stroke-width="2" stroke-linecap="round"/><circle cx="44" cy="46" r="10" fill="#0F1B2D" stroke="#0E7C86" stroke-width="2"/><path d="M40 46h8M44 42v8" stroke="#5eead4" stroke-width="2" stroke-linecap="round"/></svg>
+          </div>
+          <div class="body">
+            <h2>Receipt lookup</h2>
+            <p>A public checker where anyone could paste a receipt ID or fingerprint and see whether it still matches the ledger.</p>
+            <span class="cta">Open sample →</span>
+          </div>
+        </a>
+        <a class="g-card" href="/samples/agency-directory/">
+          <div class="preview" aria-hidden="true">
+            <svg width="64" height="64" viewBox="0 0 64 64" fill="none"><rect x="10" y="14" width="44" height="36" rx="4" stroke="#0E7C86" stroke-width="2.5"/><path d="M10 24h44M22 14v36M38 14v36" stroke="#2B3A52" stroke-width="1.5"/><circle cx="16" cy="19" r="2" fill="#0E7C86"/><circle cx="30" cy="32" r="2" fill="#B8C4D4"/><circle cx="46" cy="40" r="2" fill="#5eead4"/></svg>
+          </div>
+          <div class="body">
+            <h2>Agency directory</h2>
+            <p>A filterable list of which fictional agencies would publish receipts, run a pilot, or not participate yet.</p>
+            <span class="cta">Open sample →</span>
+          </div>
+        </a>
+        <a class="g-card" href="/samples/transparency-report/">
+          <div class="preview" aria-hidden="true">
+            <svg width="64" height="64" viewBox="0 0 64 64" fill="none"><rect x="8" y="10" width="48" height="44" rx="4" stroke="#0E7C86" stroke-width="2.5"/><path d="M18 42V30M28 42V22M38 42V26M48 42V18" stroke="#5eead4" stroke-width="4" stroke-linecap="round"/><path d="M14 46h36" stroke="#2B3A52" stroke-width="2"/></svg>
+          </div>
+          <div class="body">
+            <h2>Transparency report</h2>
+            <p>A monthly sample summary for Example City Police Department — KPIs, charts and auditor notes, all labeled sample data.</p>
+            <span class="cta">Open sample →</span>
+          </div>
+        </a>
+      </div>
+      <p style="margin-top:28px;font-size:14px;color:var(--muted)"><a href="/">← Back to CameraAccessTrust home</a></p>
+    </div>
+  </section>
+</main>
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <strong>CameraAccessTrust, Inc.</strong>
+        Delaware C-corp · Sponsored by Big Mutts Development, LLC<br>
+        Patent pending · © 2026 CameraAccessTrust, Inc.
+      </div>
+      <div>
+        <strong>Contact</strong>
+        <a href="mailto:gregg@cameraaccesstrust.com">gregg@cameraaccesstrust.com</a><br>
+        <a href="tel:+13364031623">336-403-1623</a>
+      </div>
+      <div>
+        <strong>Site</strong>
+        <a href="/#how">How it works</a> ·
+        <a href="/#faq">FAQ</a> ·
+        <a href="/samples/">Sample mockups</a> ·
+        <a href="/#contact">Contact</a>
+      </div>
+    </div>
+    <p class="fine">Educational site. Not legal advice. Not an offer to sell, or a request to buy, any security. Sample pages are illustrative only.</p>
+  </div>
+</footer>
+</body>
+</html>

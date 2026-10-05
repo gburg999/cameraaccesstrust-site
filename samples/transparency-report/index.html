@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/assets/favicon.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png" sizes="180x180">
+<title>Sample transparency report — Example City PD — CameraAccessTrust</title>
+<meta name="description" content="Illustrative monthly transparency report sample for Example City Police Department. Not live. All numbers are fictional.">
+<link rel="stylesheet" href="../shared.css">
+<style>
+  .report-head {
+    display: flex; flex-wrap: wrap; gap: 16px; justify-content: space-between; align-items: flex-start;
+    margin-bottom: 24px;
+  }
+  .kpis { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 28px; }
+  .kpi {
+    background: var(--white); border: 1px solid var(--rule); border-radius: 10px; padding: 18px;
+  }
+  .kpi .label { font-size: 12px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; }
+  .kpi .value {
+    font-size: 32px; font-weight: 700; color: var(--navy); margin: 6px 0 4px;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  }
+  .kpi .sub { font-size: 12px; color: var(--muted); }
+  .charts { display: grid; grid-template-columns: 1.2fr 0.8fr; gap: 18px; margin-bottom: 28px; }
+  .chart-card h3 { color: var(--navy); font-size: 16px; margin-bottom: 6px; }
+  .chart-card .sub { font-size: 12px; color: var(--muted); margin-bottom: 14px; }
+  .chart-svg { width: 100%; height: auto; display: block; }
+  .denials { width: 100%; border-collapse: collapse; font-size: 15px; }
+  .denials th, .denials td { text-align: left; padding: 12px 14px; border-bottom: 1px solid var(--rule); }
+  .denials th {
+    background: var(--light); font-size: 12px; text-transform: uppercase; letter-spacing: 0.06em;
+    color: var(--navy);
+  }
+  .denials td.num {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-weight: 600;
+  }
+  .auditor {
+    background: var(--tint); border-left: 4px solid var(--accent); border-radius: 0 10px 10px 0;
+    padding: 18px 20px; margin-top: 24px;
+  }
+  .auditor h3 { color: var(--navy); font-size: 16px; margin-bottom: 8px; }
+  .auditor p { font-size: 15px; color: var(--body); margin-bottom: 8px; }
+  .print-actions { display: flex; gap: 10px; flex-wrap: wrap; }
+  @media (max-width: 900px) {
+    .kpis { grid-template-columns: 1fr 1fr; }
+    .charts { grid-template-columns: 1fr; }
+  }
+  @media print {
+    .sample-banner, .nav, .print-actions, footer, .no-print { display: none !important; }
+    body { font-size: 12pt; background: #fff; color: #000; }
+    .page-hero { background: #fff !important; color: #000 !important; padding: 0 0 12pt; }
+    .page-hero h1, .page-hero .lead, .page-hero .kicker { color: #000 !important; }
+    .sample-tag { border-color: #999; color: #333; background: #eee; }
+    section { padding: 12pt 0; }
+    .kpi, .chart-card, .card { box-shadow: none; break-inside: avoid; }
+    a { color: #000; text-decoration: none; }
+    .wrap { max-width: 100%; padding: 0 12pt; }
+  }
+</style>
+</head>
+<body>
+<div class="sample-banner">Sample mockup — illustrative only. Not live. All agencies, people and data are fictional.</div>
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a class="logo" href="/"><img class="logo-mark" src="/assets/logo.svg" width="28" height="28" alt="" aria-hidden="true"><span class="logo-text">Camera<span>Access</span>Trust</span></a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="/#how">How it works</a>
+      <a href="/#receipt">Receipts</a>
+      <a href="/#who">Who it’s for</a>
+      <a href="/#why">Why it matters</a>
+      <a href="/#faq">FAQ</a>
+      <a href="/#contact">Contact</a>
+    </nav>
+    <span class="pill">Patent pending</span>
+    <a class="btn" href="/#contact">Ask about a pilot</a>
+  </div>
+</header>
+
+<main>
+  <section class="page-hero">
+    <div class="wrap">
+      <div class="kicker">Sample mockup · planned monthly report</div>
+      <h1>Transparency report</h1>
+      <p class="lead">Example City Police Department · September 2026 (sample). All figures below are fictional and labeled as sample data.</p>
+      <span class="sample-tag">Sample data · Not an official report</span>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap">
+      <div class="report-head">
+        <div>
+          <div class="eyebrow">Agency</div>
+          <h2 style="margin-bottom:4px">Example City Police Department</h2>
+          <p style="color:var(--muted);font-size:15px">Reporting period: <strong style="color:var(--navy)">September 2026 (sample)</strong></p>
+        </div>
+        <div class="print-actions">
+          <button class="btn btn-ghost" type="button" onclick="window.print()">Print / save PDF</button>
+          <a class="btn" href="/samples/agency-directory/">Back to directory</a>
+        </div>
+      </div>
+
+      <div class="kpis" role="list">
+        <div class="kpi" role="listitem">
+          <div class="label">Searches logged</div>
+          <div class="value">412</div>
+          <div class="sub">Sample total for the month</div>
+        </div>
+        <div class="kpi" role="listitem">
+          <div class="label">Approved</div>
+          <div class="value">371</div>
+          <div class="sub">Sample · 90% of logged</div>
+        </div>
+        <div class="kpi" role="listitem">
+          <div class="label">Denied</div>
+          <div class="value">41</div>
+          <div class="sub">Sample · also recorded</div>
+        </div>
+        <div class="kpi" role="listitem">
+          <div class="label">Median time to receipt</div>
+          <div class="value">2.4<span style="font-size:18px">m</span></div>
+          <div class="sub">Sample minutes from request→post</div>
+        </div>
+      </div>
+
+      <div class="charts">
+        <div class="card chart-card">
+          <h3>Searches by week</h3>
+          <p class="sub">Sample weekly totals · September 2026</p>
+          <svg class="chart-svg" viewBox="0 0 480 220" role="img" aria-label="Sample bar chart of searches by week: 88, 102, 95, 127">
+            <text x="0" y="14" fill="#64748B" font-size="11" font-family="Arial,Helvetica,sans-serif">Sample data</text>
+            <!-- grid -->
+            <line x1="48" y1="40" x2="48" y2="180" stroke="#CBD5E1" stroke-width="1"/>
+            <line x1="48" y1="180" x2="460" y2="180" stroke="#CBD5E1" stroke-width="1"/>
+            <line x1="48" y1="110" x2="460" y2="110" stroke="#E2E8F0" stroke-width="1" stroke-dasharray="4 4"/>
+            <line x1="48" y1="40" x2="460" y2="40" stroke="#E2E8F0" stroke-width="1" stroke-dasharray="4 4"/>
+            <!-- bars: max 127 -> 140px height scale -->
+            <rect x="80" y="82" width="56" height="98" rx="4" fill="#0E7C86"/>
+            <text x="108" y="76" text-anchor="middle" fill="#0F1B2D" font-size="12" font-weight="700" font-family="ui-monospace,Menlo,Consolas,monospace">88</text>
+            <text x="108" y="198" text-anchor="middle" fill="#64748B" font-size="12" font-family="Arial,Helvetica,sans-serif">Week 1</text>
+
+            <rect x="170" y="66" width="56" height="114" rx="4" fill="#0E7C86"/>
+            <text x="198" y="60" text-anchor="middle" fill="#0F1B2D" font-size="12" font-weight="700" font-family="ui-monospace,Menlo,Consolas,monospace">102</text>
+            <text x="198" y="198" text-anchor="middle" fill="#64748B" font-size="12" font-family="Arial,Helvetica,sans-serif">Week 2</text>
+
+            <rect x="260" y="74" width="56" height="106" rx="4" fill="#0E7C86"/>
+            <text x="288" y="68" text-anchor="middle" fill="#0F1B2D" font-size="12" font-weight="700" font-family="ui-monospace,Menlo,Consolas,monospace">95</text>
+            <text x="288" y="198" text-anchor="middle" fill="#64748B" font-size="12" font-family="Arial,Helvetica,sans-serif">Week 3</text>
+
+            <rect x="350" y="40" width="56" height="140" rx="4" fill="#0E7C86"/>
+            <text x="378" y="34" text-anchor="middle" fill="#0F1B2D" font-size="12" font-weight="700" font-family="ui-monospace,Menlo,Consolas,monospace">127</text>
+            <text x="378" y="198" text-anchor="middle" fill="#64748B" font-size="12" font-family="Arial,Helvetica,sans-serif">Week 4</text>
+          </svg>
+        </div>
+
+        <div class="card chart-card">
+          <h3>Purpose categories</h3>
+          <p class="sub">Sample share of approved searches</p>
+          <svg class="chart-svg" viewBox="0 0 320 220" role="img" aria-label="Sample donut chart of purpose categories">
+            <!-- donut: investigation 48%, warrant 22%, missing person 18%, other 12% -->
+            <!-- Using stroke-dasharray on circle circumference 2*pi*56 ≈ 351.86 -->
+            <circle cx="110" cy="110" r="56" fill="none" stroke="#E3F2F3" stroke-width="28"/>
+            <circle cx="110" cy="110" r="56" fill="none" stroke="#0E7C86" stroke-width="28"
+              stroke-dasharray="168.9 182.96" stroke-dashoffset="0" transform="rotate(-90 110 110)"/>
+            <circle cx="110" cy="110" r="56" fill="none" stroke="#14B8A6" stroke-width="28"
+              stroke-dasharray="77.4 274.46" stroke-dashoffset="-168.9" transform="rotate(-90 110 110)"/>
+            <circle cx="110" cy="110" r="56" fill="none" stroke="#0F1B2D" stroke-width="28"
+              stroke-dasharray="63.3 288.56" stroke-dashoffset="-246.3" transform="rotate(-90 110 110)"/>
+            <circle cx="110" cy="110" r="56" fill="none" stroke="#94A3B8" stroke-width="28"
+              stroke-dasharray="42.2 309.66" stroke-dashoffset="-309.6" transform="rotate(-90 110 110)"/>
+            <circle cx="110" cy="110" r="38" fill="#FFFFFF"/>
+            <text x="110" y="106" text-anchor="middle" fill="#0F1B2D" font-size="14" font-weight="700" font-family="Arial,Helvetica,sans-serif">Sample</text>
+            <text x="110" y="122" text-anchor="middle" fill="#64748B" font-size="11" font-family="Arial,Helvetica,sans-serif">371 approved</text>
+            <!-- legend -->
+            <rect x="190" y="48" width="12" height="12" rx="2" fill="#0E7C86"/>
+            <text x="208" y="58" fill="#334155" font-size="12" font-family="Arial,Helvetica,sans-serif">Investigation 48%</text>
+            <rect x="190" y="74" width="12" height="12" rx="2" fill="#14B8A6"/>
+            <text x="208" y="84" fill="#334155" font-size="12" font-family="Arial,Helvetica,sans-serif">Warrant 22%</text>
+            <rect x="190" y="100" width="12" height="12" rx="2" fill="#0F1B2D"/>
+            <text x="208" y="110" fill="#334155" font-size="12" font-family="Arial,Helvetica,sans-serif">Missing person 18%</text>
+            <rect x="190" y="126" width="12" height="12" rx="2" fill="#94A3B8"/>
+            <text x="208" y="136" fill="#334155" font-size="12" font-family="Arial,Helvetica,sans-serif">Other 12%</text>
+            <text x="190" y="168" fill="#92400E" font-size="11" font-family="Arial,Helvetica,sans-serif">All % are sample</text>
+          </svg>
+        </div>
+      </div>
+
+      <div class="card" style="margin-bottom:8px">
+        <h3 style="color:var(--navy);font-size:16px;margin-bottom:6px">Denials by reason</h3>
+        <p style="font-size:12px;color:var(--muted);margin-bottom:12px">Sample counts · September 2026 · 41 denials total</p>
+        <table class="denials">
+          <thead>
+            <tr>
+              <th scope="col">Reason (sample categories)</th>
+              <th scope="col">Count</th>
+              <th scope="col">Share</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Missing case number or documented reason</td>
+              <td class="num">18</td>
+              <td class="num">44%</td>
+            </tr>
+            <tr>
+              <td>Role not authorized for this query type</td>
+              <td class="num">11</td>
+              <td class="num">27%</td>
+            </tr>
+            <tr>
+              <td>Outside permitted geographic area</td>
+              <td class="num">7</td>
+              <td class="num">17%</td>
+            </tr>
+            <tr>
+              <td>Warrant / court order reference incomplete</td>
+              <td class="num">5</td>
+              <td class="num">12%</td>
+            </tr>
+          </tbody>
+        </table>
+        <p style="margin-top:10px;font-size:12px;color:var(--muted)">Sample data only. Denials are part of the planned record design.</p>
+      </div>
+
+      <div class="auditor">
+        <h3>Auditor notes (sample)</h3>
+        <p>This box shows where an approved auditor’s summary could appear. Text here is fictional and for layout only.</p>
+        <p>“Sample review of September 2026 sealed records for Example City Police Department found no unexplained fingerprint mismatches in this illustrative dataset. Purpose categories and denial reasons align with the sample rule set used for this mockup.”</p>
+        <p style="font-size:13px;color:var(--muted);margin:0">— Sample Auditor Desk · not a real audit · October 2026 (sample)</p>
+      </div>
+
+      <p style="margin-top:28px;font-size:14px;color:var(--muted)" class="no-print">
+        <a href="/samples/">← All sample mockups</a> ·
+        <a href="/samples/receipt-lookup/">Receipt lookup</a> ·
+        <a href="/samples/agency-directory/">Agency directory</a>
+      </p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <strong>CameraAccessTrust, Inc.</strong>
+        Delaware C-corp · Sponsored by Big Mutts Development, LLC<br>
+        Patent pending · © 2026 CameraAccessTrust, Inc.
+      </div>
+      <div>
+        <strong>Contact</strong>
+        <a href="mailto:gregg@cameraaccesstrust.com">gregg@cameraaccesstrust.com</a><br>
+        <a href="tel:+13364031623">336-403-1623</a>
+      </div>
+      <div>
+        <strong>Site</strong>
+        <a href="/#how">How it works</a> ·
+        <a href="/#faq">FAQ</a> ·
+        <a href="/samples/">Sample mockups</a> ·
+        <a href="/#contact">Contact</a>
+      </div>
+    </div>
+    <p class="fine">Educational site. Not legal advice. Not an offer to sell, or a request to buy, any security. Sample pages are illustrative only.</p>
+  </div>
+</footer>
+</body>
+</html>

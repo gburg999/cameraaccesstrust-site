@@ -347,6 +347,28 @@
   }
   .receipt-example-note { flex: 1; }
 
+
+  .future a {
+    border: 1.5px dashed var(--muted); border-radius: 10px; padding: 18px; background: var(--white);
+    color: var(--muted); display: block; text-decoration: none;
+    transition: border-color .15s, box-shadow .15s, color .15s;
+  }
+  .future a:hover {
+    border-color: var(--accent); color: var(--body); box-shadow: 0 8px 24px rgba(15,27,45,.06);
+    text-decoration: none;
+  }
+  .future a strong { display: block; color: var(--navy); margin-bottom: 6px; }
+  .future a .try {
+    display: inline-block; margin-top: 10px; font-size: 13px; font-weight: 700; color: var(--accent);
+  }
+  .samples-callout {
+    margin-top: 28px; padding: 18px 20px; background: var(--tint); border: 1px solid #b6d9dc;
+    border-radius: 10px; display: flex; flex-wrap: wrap; gap: 14px; align-items: center;
+    justify-content: space-between;
+  }
+  .samples-callout p { margin: 0; font-size: 15px; color: var(--body); max-width: 40em; }
+  .samples-callout strong { color: var(--navy); }
+
   @media (max-width: 900px) {
     .hero-art { display: none; }
     .flow {
@@ -565,6 +587,10 @@
             <div><strong>CameraAccessTrust</strong>Full sealed records for the city &amp; approved auditors</div>
             <div><strong>Public ledger</strong>Fingerprints only — no names, plates or video</div>
           </div>
+          <div class="samples-callout">
+            <p><strong>See sample mockups.</strong> Explore illustrative screens for a planned receipt checker, agency directory and monthly report — fictional data only, not live.</p>
+            <a class="btn" href="/samples/">Open sample mockups</a>
+          </div>
         </div>
       </div>
     </div>
@@ -681,10 +707,11 @@
     <div class="wrap">
       <div class="eyebrow">Future portal</div>
       <h2>Coming later.</h2>
+      <p class="section-lead">Preview illustrative sample screens of what we plan to build. Not live — fictional agencies and data only.</p>
       <div class="future">
-        <div><strong>Receipt lookup</strong>Free public checker in a browser, no account.</div>
-        <div><strong>Agency directory</strong>Which agencies publish receipts.</div>
-        <div><strong>Transparency reports</strong>Periodic public summaries.</div>
+        <a href="/samples/receipt-lookup/"><strong>Receipt lookup</strong>Free public checker in a browser, no account.<span class="try">See sample →</span></a>
+        <a href="/samples/agency-directory/"><strong>Agency directory</strong>Which agencies publish receipts.<span class="try">See sample →</span></a>
+        <a href="/samples/transparency-report/"><strong>Transparency reports</strong>Periodic public summaries.<span class="try">See sample →</span></a>
       </div>
     </div>
   </section>
@@ -707,6 +734,7 @@
         <strong>Site</strong>
         <a href="#how">How it works</a> ·
         <a href="#faq">FAQ</a> ·
+        <a href="/samples/">Sample mockups</a> ·
         <a href="#contact">Contact</a>
       </div>
     </div>

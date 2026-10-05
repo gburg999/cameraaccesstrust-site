@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/assets/favicon.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png" sizes="180x180">
+<title>Sample receipt lookup — CameraAccessTrust</title>
+<meta name="description" content="Illustrative sample of a planned public receipt checker. Not live. All data is fictional.">
+<link rel="stylesheet" href="../shared.css">
+<script>
+/* Collapse hero early when deep-linking to a revealed sample result */
+(function () {
+  try {
+    var d = new URLSearchParams(location.search).get('demo');
+    if (d === 'match' || d === 'tamper') document.documentElement.classList.add('demo-result');
+  } catch (e) {}
+})();
+</script>
+<style>
+  .lookup-box { max-width: 720px; }
+  .lookup-row { display: flex; gap: 12px; flex-wrap: wrap; align-items: flex-end; }
+  .lookup-row .grow { flex: 1 1 280px; }
+  .hint { font-size: 13px; color: var(--muted); margin-top: 8px; }
+  .examples { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+  .chip {
+    font-size: 13px; font-weight: 700; padding: 8px 12px; border-radius: 999px;
+    border: 1.5px solid var(--rule); background: var(--white); color: var(--navy); cursor: pointer;
+  }
+  .chip:hover, .chip.active { border-color: var(--accent); color: var(--accent); background: var(--tint); }
+  .result { margin-top: 28px; display: none; }
+  .result.show { display: block; }
+  .status-bar {
+    display: flex; align-items: center; gap: 14px; padding: 16px 18px; border-radius: 10px 10px 0 0;
+    font-weight: 700;
+  }
+  .status-bar.match { background: var(--ok-bg); color: var(--ok); border: 1px solid var(--ok-border); border-bottom: none; }
+  .status-bar.tamper { background: var(--bad-bg); color: var(--bad); border: 1px solid var(--bad-border); border-bottom: none; }
+  .status-icon {
+    width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0; font-size: 18px;
+  }
+  .status-bar.match .status-icon { background: var(--ok); color: #fff; }
+  .status-bar.tamper .status-icon { background: var(--bad); color: #fff; }
+  .result-body {
+    border: 1px solid var(--rule); border-top: none; border-radius: 0 0 10px 10px;
+    padding: 22px; background: #FFFEF8;
+  }
+  .result-body.tamper-border { border-color: var(--bad-border); }
+  .result-body.match-border { border-color: var(--ok-border); }
+  .meta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px 24px; }
+  .meta dt { font-size: 11px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; }
+  .meta dd {
+    font-size: 15px; color: var(--navy); font-weight: 600;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    border-bottom: 1px dotted var(--rule); padding-bottom: 6px; margin-bottom: 4px;
+  }
+  .hash {
+    margin-top: 18px; padding: 12px 14px; background: var(--light); border-radius: 8px;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 13px; color: var(--ink); word-break: break-all;
+  }
+  .hash strong { display: block; font-family: Arial, Helvetica, sans-serif; font-size: 11px;
+    color: var(--muted); letter-spacing: 0.06em; text-transform: uppercase; margin-bottom: 4px; }
+  .ledger { margin-top: 10px; font-size: 14px; color: var(--muted); }
+  .timeline { margin-top: 22px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+  .tl-step {
+    background: var(--white); border: 1px solid var(--rule); border-radius: 8px; padding: 12px;
+    position: relative;
+  }
+  .tl-step .n {
+    width: 24px; height: 24px; border-radius: 50%; background: var(--tint); color: var(--accent);
+    font-size: 12px; font-weight: 700; display: flex; align-items: center; justify-content: center; margin-bottom: 8px;
+  }
+  .tl-step.done .n { background: var(--accent); color: #fff; }
+  .tl-step.warn .n { background: var(--bad); color: #fff; }
+  .tl-step strong { display: block; color: var(--navy); font-size: 14px; margin-bottom: 2px; }
+  .tl-step span { font-size: 12px; color: var(--muted); }
+  .note { margin-top: 18px; font-size: 13px; color: var(--muted); font-style: italic; }
+  @media (max-width: 900px) {
+    .meta-grid, .timeline { grid-template-columns: 1fr; }
+  }
+  /* Compact so verified result fits a 900px desktop viewport */
+  .page-hero { padding: 28px 0 32px; }
+  .page-hero h1 { font-size: 30px; margin-bottom: 8px; }
+  .page-hero .lead { font-size: 16px; }
+  section { padding: 28px 0 40px; }
+  .section-lead { margin-bottom: 16px; font-size: 15px; }
+  .card { padding: 16px; }
+  .result { margin-top: 18px; }
+  .status-bar { padding: 12px 14px; }
+  .result-body { padding: 16px; }
+  .meta-grid { gap: 8px 20px; }
+  .meta dd { font-size: 14px; }
+  .timeline { margin-top: 14px; gap: 8px; }
+  .tl-step { padding: 10px; }
+  .hash { margin-top: 12px; padding: 10px 12px; font-size: 12px; }
+  html.demo-result .page-hero { display: none; }
+  html.demo-result section { padding-top: 20px; }
+</style>
+</head>
+<body>
+<div class="sample-banner">Sample mockup — illustrative only. Not live. All agencies, people and data are fictional.</div>
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a class="logo" href="/"><img class="logo-mark" src="/assets/logo.svg" width="28" height="28" alt="" aria-hidden="true"><span class="logo-text">Camera<span>Access</span>Trust</span></a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="/#how">How it works</a>
+      <a href="/#receipt">Receipts</a>
+      <a href="/#who">Who it’s for</a>
+      <a href="/#why">Why it matters</a>
+      <a href="/#faq">FAQ</a>
+      <a href="/#contact">Contact</a>
+    </nav>
+    <span class="pill">Patent pending</span>
+    <a class="btn" href="/#contact">Ask about a pilot</a>
+  </div>
+</header>
+
+<main>
+  <section class="page-hero">
+    <div class="wrap">
+      <div class="kicker">Sample mockup · planned public checker</div>
+      <h1>Receipt lookup</h1>
+      <p class="lead">Anyone would be able to check a receipt online, without an account. If it matches the public fingerprint, the record hasn’t been changed since it was posted.</p>
+      <span class="sample-tag">Sample data only · Not live</span>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap lookup-box">
+      <div class="eyebrow">Try an example</div>
+      <h2>Check a receipt</h2>
+      <p class="section-lead">Paste a receipt ID or fingerprint. Below are two fictional examples — one that matches, and one that shows a changed record.</p>
+
+      <form id="lookup-form" class="card" action="#" method="get">
+        <label class="field-label" for="receipt-id">Receipt ID or fingerprint</label>
+        <div class="lookup-row">
+          <div class="grow">
+            <input class="input" id="receipt-id" name="id" type="text" autocomplete="off"
+              value="rcpt_ex_20261005_a7f3" aria-describedby="id-hint">
+          </div>
+          <button class="btn" type="submit" id="check-btn">Check receipt</button>
+        </div>
+        <p class="hint" id="id-hint">Prefilled with a fictional sample ID. No network request is made.</p>
+        <div class="examples" role="group" aria-label="Sample examples">
+          <button type="button" class="chip active" data-demo="match" id="chip-match">Example: matches</button>
+          <button type="button" class="chip" data-demo="tamper" id="chip-tamper">Example: record changed</button>
+        </div>
+      </form>
+
+      <div class="result" id="result" aria-live="polite"></div>
+      <p style="margin-top:28px;font-size:14px;color:var(--muted)">
+        <a href="/samples/">← All sample mockups</a> ·
+        <a href="/samples/agency-directory/">Agency directory</a> ·
+        <a href="/samples/transparency-report/">Transparency report</a>
+      </p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <strong>CameraAccessTrust, Inc.</strong>
+        Delaware C-corp · Sponsored by Big Mutts Development, LLC<br>
+        Patent pending · © 2026 CameraAccessTrust, Inc.
+      </div>
+      <div>
+        <strong>Contact</strong>
+        <a href="mailto:gregg@cameraaccesstrust.com">gregg@cameraaccesstrust.com</a><br>
+        <a href="tel:+13364031623">336-403-1623</a>
+      </div>
+      <div>
+        <strong>Site</strong>
+        <a href="/#how">How it works</a> ·
+        <a href="/#faq">FAQ</a> ·
+        <a href="/samples/">Sample mockups</a> ·
+        <a href="/#contact">Contact</a>
+      </div>
+    </div>
+    <p class="fine">Educational site. Not legal advice. Not an offer to sell, or a request to buy, any security. Sample pages are illustrative only.</p>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var EXAMPLES = {
+    match: {
+      id: 'rcpt_ex_20261005_a7f3',
+      state: 'match',
+      title: 'Matches public fingerprint',
+      detail: 'The sealed record still matches the fingerprint posted to the public ledger.',
+      agency: 'Example City Police Department',
+      window: 'Oct 5, 2026 · afternoon',
+      purpose: 'Active investigation (case number on file)',
+      rule: 'Role + documented case number (sample rule set)',
+      status: 'Record sealed · Fingerprint posted',
+      hash: '0xf3a7…c91e8b2d4a (truncated · sample)',
+      ledger: 'Sample ledger position · block #10482 · offset 17 (fictional)',
+      timeline: [
+        { label: 'Requested', when: 'Oct 5, 2026 · 14:02 (sample)', cls: 'done' },
+        { label: 'Checked', when: 'Allowed · rule matched (sample)', cls: 'done' },
+        { label: 'Sealed', when: 'Digital signature applied (sample)', cls: 'done' },
+        { label: 'Posted', when: 'Fingerprint on public ledger (sample)', cls: 'done' }
+      ]
+    },
+    tamper: {
+      id: 'rcpt_ex_20260918_tamper',
+      state: 'tamper',
+      title: 'Does not match: record changed',
+      detail: 'The local sealed record no longer matches the fingerprint that was posted. In the planned design, any change would show.',
+      agency: 'Sample County Sheriff’s Office',
+      window: 'Sep 18, 2026 · morning',
+      purpose: 'Training / audit exercise (sample)',
+      rule: 'Denied — missing warrant reference (sample)',
+      status: 'Fingerprint mismatch · review flagged (sample)',
+      hash: '0x9c12…expected  ·  0x9c12…observed≠ (sample)',
+      ledger: 'Sample ledger position · block #10391 · offset 4 (fictional)',
+      timeline: [
+        { label: 'Requested', when: 'Sep 18, 2026 · 09:41 (sample)', cls: 'done' },
+        { label: 'Checked', when: 'Denied · recorded (sample)', cls: 'done' },
+        { label: 'Sealed', when: 'Originally sealed (sample)', cls: 'done' },
+        { label: 'Posted', when: 'Mismatch detected on check (sample)', cls: 'warn' }
+      ]
+    }
+  };
+
+  var form = document.getElementById('lookup-form');
+  var input = document.getElementById('receipt-id');
+  var result = document.getElementById('result');
+  var chips = document.querySelectorAll('.chip');
+  var current = 'match';
+
+  function render(demo) {
+    var d = EXAMPLES[demo] || EXAMPLES.match;
+    current = demo;
+    input.value = d.id;
+    chips.forEach(function (c) {
+      c.classList.toggle('active', c.getAttribute('data-demo') === demo);
+    });
+    var tl = d.timeline.map(function (t, i) {
+      return '<div class="tl-step ' + t.cls + '"><div class="n">' + (i + 1) + '</div><strong>' + t.label + '</strong><span>' + t.when + '</span></div>';
+    }).join('');
+    var border = d.state === 'match' ? 'match-border' : 'tamper-border';
+    var icon = d.state === 'match' ? '✓' : '!';
+    result.innerHTML =
+      '<div class="status-bar ' + d.state + '"><div class="status-icon" aria-hidden="true">' + icon + '</div><div><div>' + d.title + '</div><div style="font-weight:500;font-size:14px;margin-top:2px;opacity:.9">' + d.detail + '</div></div></div>' +
+      '<div class="result-body ' + border + '">' +
+        '<span class="badge badge-sample">Sample result</span>' +
+        '<dl class="meta meta-grid" style="margin-top:14px">' +
+          '<div><dt>Agency</dt><dd>' + d.agency + '</dd></div>' +
+          '<div><dt>Time window</dt><dd>' + d.window + '</dd></div>' +
+          '<div><dt>Purpose category</dt><dd>' + d.purpose + '</dd></div>' +
+          '<div><dt>Approval rule matched</dt><dd>' + d.rule + '</dd></div>' +
+          '<div><dt>Status</dt><dd>' + d.status + '</dd></div>' +
+          '<div><dt>Receipt ID</dt><dd>' + d.id + '</dd></div>' +
+        '</dl>' +
+        '<div class="hash"><strong>Fingerprint (truncated · sample)</strong>' + d.hash + '</div>' +
+        '<p class="ledger">' + d.ledger + '</p>' +
+        '<div class="eyebrow" style="margin-top:22px">Timeline (sample)</div>' +
+        '<div class="timeline">' + tl + '</div>' +
+        '<p class="note">Illustrative only. No live ledger is queried. Video, names and plates are never shown on a public receipt.</p>' +
+      '</div>';
+    result.classList.add('show');
+  }
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var v = (input.value || '').toLowerCase();
+    if (v.indexOf('tamper') !== -1 || v.indexOf('9c12') !== -1) render('tamper');
+    else render(current || 'match');
+  });
+
+  chips.forEach(function (c) {
+    c.addEventListener('click', function () {
+      render(c.getAttribute('data-demo'));
+    });
+  });
+
+  var params = new URLSearchParams(window.location.search);
+  var demo = params.get('demo');
+  if (demo === 'match' || demo === 'tamper') {
+    render(demo);
+    // Sync scroll so headless screenshots catch the revealed card
+    result.scrollIntoView(true);
+    window.scrollBy(0, -8);
+  }
+})();
+</script>
+</body>
+</html>
