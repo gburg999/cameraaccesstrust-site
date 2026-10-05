@@ -1,0 +1,399 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Founding Software Engineer — CameraAccessTrust Careers</title>
+<meta name="description" content="CameraAccessTrust is hiring a Founding Software Engineer (US remote-first) to build privacy-preserving authorization and audit for camera and license-plate data.">
+<style>
+  :root {
+    --navy: #0F1B2D;
+    --ink: #1E293B;
+    --body: #334155;
+    --muted: #64748B;
+    --rule: #CBD5E1;
+    --light: #F1F5F9;
+    --white: #FFFFFF;
+    --accent: #0E7C86;
+    --tint: #E3F2F3;
+    --onnavy: #B8C4D4;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: Arial, Helvetica, sans-serif;
+    color: var(--body);
+    background: var(--white);
+    line-height: 1.45;
+    font-size: 17px;
+  }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
+  .wire-banner {
+    background: #FEF3C7; color: #92400E; font-size: 13px; text-align: center;
+    padding: 8px 16px; border-bottom: 1px solid #F59E0B;
+  }
+
+  /* Nav */
+  .nav {
+    position: sticky; top: 0; z-index: 20;
+    background: rgba(15,27,45,0.96); color: var(--white);
+    border-bottom: 1px solid #1f2d44;
+  }
+  .nav-inner { display: flex; align-items: center; gap: 20px; padding: 14px 0; flex-wrap: wrap; }
+  .logo { font-weight: 700; font-size: 18px; color: var(--white); letter-spacing: 0.02em; }
+  .logo span { color: var(--accent); }
+  .nav-links { display: flex; gap: 18px; flex: 1; flex-wrap: wrap; font-size: 14px; }
+  .nav-links a { color: var(--onnavy); }
+  .nav-links a:hover { color: var(--white); text-decoration: none; }
+  .pill {
+    font-size: 11px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase;
+    border: 1px solid var(--accent); color: var(--accent); padding: 5px 10px; border-radius: 999px;
+  }
+  .btn {
+    display: inline-block; background: var(--accent); color: var(--white) !important;
+    font-weight: 700; font-size: 14px; padding: 11px 18px; border-radius: 6px;
+    text-decoration: none !important; border: none; cursor: pointer;
+  }
+  .btn:hover { filter: brightness(1.08); }
+  .btn-ghost {
+    background: transparent; color: var(--accent) !important;
+    border: 1.5px solid var(--accent);
+  }
+  .btn-light { background: var(--white); color: var(--navy) !important; }
+  .btn-row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 22px; }
+
+  /* Hero */
+  .hero {
+    background: var(--navy); color: var(--white);
+    padding: 72px 0 80px;
+  }
+  .hero-grid { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 48px; align-items: center; }
+  .kicker {
+    color: var(--accent); font-size: 12px; font-weight: 700; letter-spacing: 0.08em;
+    text-transform: uppercase; margin-bottom: 14px;
+  }
+  .hero h1 {
+    font-size: 46px; line-height: 1.08; font-weight: 700; color: var(--white);
+    margin-bottom: 18px;
+  }
+  .hero h1 em { color: var(--accent); font-style: normal; }
+  .hero .lead { font-size: 20px; color: var(--onnavy); max-width: 34em; margin-bottom: 10px; }
+  .hero .support { font-size: 16px; color: var(--muted); max-width: 34em; }
+  .options {
+    margin-top: 28px; padding: 14px 16px; background: #162438; border: 1px dashed #334155;
+    border-radius: 8px; font-size: 13px; color: var(--onnavy);
+  }
+  .options strong { color: var(--white); }
+
+  /* Sign-in sheet card */
+  .sheet {
+    background: var(--white); color: var(--navy); border-radius: 10px;
+    border: 2px solid #1f2d44; overflow: hidden; box-shadow: 0 20px 50px rgba(0,0,0,0.35);
+  }
+  .sheet-head {
+    background: var(--navy); color: var(--white); padding: 14px 18px;
+    font-weight: 700; font-size: 14px; letter-spacing: 0.04em;
+  }
+  .sheet-body { padding: 18px; }
+  .sheet-cols { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; font-weight: 700; font-size: 14px; margin-bottom: 10px; }
+  .sheet-row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-bottom: 10px; }
+  .sheet-row span { height: 12px; background: var(--light); border-radius: 4px; display: block; }
+  .seal {
+    margin: 18px auto 6px; width: 88px; height: 88px; border-radius: 50%;
+    background: var(--accent); color: var(--white); display: flex; align-items: center;
+    justify-content: center; font-weight: 700; font-size: 13px; letter-spacing: 0.06em;
+  }
+
+  section { padding: 72px 0; }
+  section.alt { background: var(--light); }
+  section h2 {
+    font-size: 34px; color: var(--navy); line-height: 1.15; margin-bottom: 14px;
+  }
+  .section-lead { font-size: 19px; color: var(--body); max-width: 40em; margin-bottom: 28px; }
+  .eyebrow {
+    color: var(--accent); font-size: 12px; font-weight: 700; letter-spacing: 0.08em;
+    text-transform: uppercase; margin-bottom: 10px;
+  }
+
+  /* Problem */
+  .problem-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 36px; align-items: start; }
+  .log-card {
+    background: var(--navy); color: var(--white); border-radius: 10px; padding: 24px;
+    min-height: 220px; position: relative;
+  }
+  .log-card h3 { font-size: 18px; margin-bottom: 14px; }
+  .log-lines span { display: block; height: 10px; background: #2B3A52; border-radius: 3px; margin-bottom: 10px; }
+  .lock {
+    position: absolute; right: 20px; bottom: 18px; width: 36px; height: 28px;
+    border-radius: 6px; background: var(--accent);
+  }
+  .lock:before {
+    content: ""; position: absolute; left: 8px; top: -14px; width: 16px; height: 16px;
+    border: 3px solid var(--accent); border-bottom: none; border-radius: 10px 10px 0 0; background: transparent;
+  }
+  .lock:after {
+    content: ""; position: absolute; left: 15px; top: 8px; width: 6px; height: 6px;
+    border-radius: 50%; background: var(--navy);
+  }
+  .askers { display: flex; gap: 12px; flex-wrap: wrap; margin: 18px 0; }
+  .asker {
+    flex: 1; min-width: 120px; background: var(--white); border: 1px solid var(--rule);
+    border-radius: 8px; padding: 16px; text-align: center; color: var(--navy); font-weight: 700;
+  }
+  .bubble {
+    display: inline-block; background: var(--tint); color: var(--navy); padding: 10px 14px;
+    border-radius: 8px; font-style: italic; margin-right: 8px; margin-bottom: 8px;
+  }
+  .bubble.reply { background: var(--accent); color: var(--white); font-style: italic; font-weight: 700; }
+  .callout {
+    margin-top: 20px; padding: 14px 16px; border-left: 4px solid var(--accent);
+    background: var(--tint); font-size: 15px; color: var(--body);
+  }
+  .src { font-size: 12px; color: var(--muted); margin-top: 8px; }
+
+  /* Steps */
+  .steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+  .step {
+    background: var(--white); border: 1px solid var(--rule); border-radius: 10px;
+    padding: 22px 18px; min-height: 260px; display: flex; flex-direction: column;
+  }
+  .step-num {
+    width: 36px; height: 36px; border-radius: 50%; background: var(--tint); color: var(--accent);
+    font-weight: 700; display: flex; align-items: center; justify-content: center; margin-bottom: 14px;
+  }
+  .step h3 { color: var(--navy); font-size: 20px; margin-bottom: 8px; }
+  .step p { font-size: 15px; color: var(--body); }
+  .step .mech {
+    margin-top: auto; padding-top: 12px; border-top: 1px dashed var(--rule);
+    font-size: 13px; color: var(--muted);
+  }
+  .close-line {
+    margin-top: 28px; text-align: center; font-size: 20px; font-weight: 700; color: var(--accent);
+  }
+
+  /* Receipt */
+  .receipt-grid { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 36px; align-items: start; }
+  .receipt {
+    background: var(--white); border: 2px solid var(--navy); border-radius: 8px;
+    padding: 0 0 18px; position: relative; overflow: hidden;
+  }
+  .receipt:before { content: ""; display: block; height: 8px; background: var(--accent); }
+  .receipt h3 {
+    color: var(--accent); font-size: 13px; letter-spacing: 0.08em; padding: 16px 20px 8px;
+  }
+  .receipt dl { padding: 0 20px; }
+  .receipt dt { font-size: 12px; color: var(--muted); margin-top: 12px; }
+  .receipt dd { font-size: 18px; color: var(--navy); font-weight: 700; }
+  .tbd {
+    display: inline-block; background: #FEF3C7; color: #92400E; border: 1px dashed #F59E0B;
+    font-size: 13px; font-weight: 700; padding: 2px 8px; border-radius: 4px;
+  }
+  .coming {
+    display: inline-block; margin-top: 12px; background: var(--light); color: var(--muted);
+    border: 1px dashed var(--muted); font-size: 12px; font-weight: 700; padding: 6px 10px; border-radius: 999px;
+  }
+  .privacy-strip {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 28px;
+  }
+  .privacy-strip div {
+    background: var(--white); border: 1px solid var(--rule); border-radius: 8px; padding: 16px;
+  }
+  .privacy-strip strong { display: block; color: var(--navy); margin-bottom: 6px; }
+
+  /* Audiences */
+  .aud { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .aud article {
+    background: var(--white); border-top: 4px solid var(--accent); border-radius: 0 0 10px 10px;
+    padding: 24px; box-shadow: 0 1px 0 var(--rule);
+  }
+  .aud h3 { color: var(--navy); font-size: 22px; margin-bottom: 10px; }
+  .aud p { font-size: 15px; }
+
+  /* Why now */
+  .why { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .why article {
+    background: var(--white); border-radius: 10px; padding: 22px; border: 1px solid var(--rule);
+  }
+  .badge {
+    display: inline-block; background: var(--navy); color: var(--white); font-weight: 700;
+    padding: 8px 12px; border-radius: 8px; margin-bottom: 14px; font-size: 14px;
+  }
+  .why h3 { color: var(--navy); font-size: 18px; margin-bottom: 8px; }
+  .why p { font-size: 15px; }
+  .disclaimer {
+    margin-top: 20px; font-size: 13px; color: var(--muted); font-style: italic;
+  }
+
+  /* FAQ */
+  .faq details {
+    background: var(--white); border: 1px solid var(--rule); border-radius: 8px;
+    padding: 16px 18px; margin-bottom: 10px;
+  }
+  .faq summary {
+    font-weight: 700; color: var(--navy); cursor: pointer; list-style: none;
+  }
+  .faq summary::-webkit-details-marker { display: none; }
+  .faq details[open] summary { margin-bottom: 10px; color: var(--accent); }
+  .faq p { font-size: 15px; color: var(--body); }
+
+  /* CTA */
+  .cta {
+    background: var(--navy); color: var(--white); padding: 64px 0;
+  }
+  .cta h2 { color: var(--white); font-size: 32px; margin-bottom: 10px; }
+  .cta p { color: var(--onnavy); max-width: 36em; margin-bottom: 22px; }
+  .cta-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  .cta-card {
+    background: #162438; border: 1px solid #2B3A52; border-radius: 10px; padding: 20px;
+  }
+  .cta-card h3 { color: var(--white); font-size: 18px; margin-bottom: 8px; }
+  .cta-card p { color: var(--onnavy); font-size: 14px; margin-bottom: 14px; }
+  .flag {
+    display: inline-block; margin-top: 8px; font-size: 11px; font-weight: 700;
+    letter-spacing: 0.04em; text-transform: uppercase; color: #FBBF24;
+  }
+
+  /* Future */
+  .future { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  .future div {
+    border: 1.5px dashed var(--muted); border-radius: 10px; padding: 18px; background: var(--white);
+    color: var(--muted);
+  }
+  .future strong { display: block; color: var(--navy); margin-bottom: 6px; }
+
+  /* Footer */
+  footer {
+    background: #0A1220; color: var(--onnavy); padding: 40px 0 28px; font-size: 14px;
+  }
+  .foot-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 24px; margin-bottom: 24px; }
+  footer strong { color: var(--white); display: block; margin-bottom: 8px; }
+  footer a { color: var(--onnavy); }
+  .fine { font-size: 12px; color: #7B8A9E; border-top: 1px solid #1f2d44; padding-top: 16px; }
+
+  @media (max-width: 900px) {
+    .hero-grid, .problem-grid, .receipt-grid, .foot-grid { grid-template-columns: 1fr; }
+    .steps, .aud, .why, .cta-cards, .privacy-strip, .future { grid-template-columns: 1fr; }
+    .hero h1 { font-size: 34px; }
+    section { padding: 48px 0; }
+    .nav-links { display: none; }
+    .nav-inner { gap: 10px; }
+    .pill { order: 3; }
+    .btn { width: 100%; text-align: center; }
+    .btn-row .btn, .btn-row .btn-ghost { width: auto; }
+  }
+</style>
+</head>
+<body>
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a class="logo" href="/#top">Camera<span>Access</span>Trust</a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="/#how">How it works</a>
+      <a href="/#receipt">Receipts</a>
+      <a href="/#who">Who it’s for</a>
+      <a href="/#why">Why it matters</a>
+      <a href="/#faq">FAQ</a>
+      <a href="/#contact">Contact</a>
+    </nav>
+    <span class="pill">Patent pending</span>
+    <a class="btn" href="/#contact">Ask about a pilot</a>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="wrap">
+      <div class="kicker">Careers</div>
+      <h1>Founding Software Engineer</h1>
+      <p class="lead">Full-time · US remote-first (US-based required)</p>
+      <div class="btn-row"><a class="btn btn-light" href="#apply">How to apply</a></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="wrap" style="max-width:820px">
+      <div class="eyebrow">About CameraAccessTrust</div>
+      <p class="section-lead">CameraAccessTrust, Inc. is building privacy-preserving authorization and audit for protected camera and license-plate (ALPR) data. Patent pending. We’re hiring a Founding Software Engineer to own the core backend: access control, audit integrity, APIs and integrations. This is a hands-on role working directly with the founder, not a manager seat.</p>
+
+      <div class="eyebrow">About the role</div>
+      <p>You’ll design and ship the systems that authorize and audit access to protected camera and ALPR resources in a privacy-preserving way. Expect ownership of architecture and production code, close work with the founder, and integration work with outside camera and ALPR ecosystems.</p>
+
+      <h2 style="font-size:24px;margin-top:28px">What you’ll do</h2>
+      <ul style="margin:0 0 20px 20px;line-height:1.6">
+        <li>Design and build the core authorization flows for protected camera and ALPR data</li>
+        <li>Build audit capabilities that support verifiable review of those actions under privacy constraints</li>
+        <li>Own secure backend services and APIs used by operators, integrators and applications</li>
+        <li>Integrate with camera and ALPR vendor APIs and identity sources as the product needs</li>
+        <li>Set practical security and reliability habits: code review, secrets handling, deployment hygiene</li>
+        <li>Threat-model access paths and keep the build honest to privacy-preserving authorization and audit</li>
+        <li>Work directly with the founder on technical tradeoffs, sequencing and scope</li>
+        <li>Document interfaces and runbooks so the system can be demoed, integrated and audited</li>
+      </ul>
+
+      <h2 style="font-size:24px">What we’re looking for</h2>
+      <ul style="margin:0 0 20px 20px;line-height:1.6">
+        <li>5+ years of professional software engineering, including substantial backend or systems work</li>
+        <li>Hands-on experience with authorization, access control, identity, security-critical backends, or high-integrity audit and logging systems</li>
+        <li>Strong API design skills and comfort integrating third-party systems</li>
+        <li>Production experience in at least one backend language (for example Go, Rust, Java, TypeScript/Node or Python). Systems judgment matters more than the language.</li>
+        <li>Comfort working as a senior individual contributor in an early-stage company with light process</li>
+        <li>Clear written communication</li>
+        <li>US-based, with US work authorization</li>
+      </ul>
+
+      <h2 style="font-size:24px">Nice to have</h2>
+      <ul style="margin:0 0 20px 20px;line-height:1.6">
+        <li>OAuth2/OIDC, SAML or enterprise identity-provider integrations</li>
+        <li>Background in security, privacy, public safety, government or other regulated environments</li>
+        <li>Cryptographic attestation or verifiable-logging experience</li>
+        <li>Prior time as an early engineer at a seed or pre-seed startup</li>
+      </ul>
+
+      <h2 style="font-size:24px">Compensation</h2>
+      <p>Competitive early-stage cash plus meaningful equity.</p>
+    </div>
+  </section>
+
+  <section class="cta" id="apply">
+    <div class="wrap">
+      <h2>How to apply</h2>
+      <p>Email your resume and a short note on why you’re a fit.</p>
+      <div class="cta-cards" style="grid-template-columns:1fr;max-width:520px;margin:0 auto">
+        <div class="cta-card">
+          <h3>Founding Software Engineer</h3>
+          <a class="btn" href="mailto:cat-hiring@agentmail.to?subject=Founding%20Software%20Engineer">Email your application</a>
+          <p style="margin-top:10px;font-size:13px">cat-hiring@agentmail.to</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <strong>CameraAccessTrust, Inc.</strong>
+        Delaware C-corp · Sponsored by Big Mutts Development, LLC<br>
+        Patent pending · © 2026 CameraAccessTrust, Inc.
+      </div>
+      <div>
+        <strong>Contact</strong>
+        <a href="mailto:gregg@bigmuttsdevelopment.com">gregg@bigmuttsdevelopment.com</a><br>
+        <a href="tel:+13364031623">336-403-1623</a>
+      </div>
+      <div>
+        <strong>Site</strong>
+        <a href="/#how">How it works</a> ·
+        <a href="/#faq">FAQ</a> ·
+        <a href="/#contact">Contact</a>
+      </div>
+    </div>
+    <p class="fine">Educational site. Not legal advice. Not an offer to sell, or a request to buy, any security.</p>
+  </div>
+</footer>
+</body>
+</html>
