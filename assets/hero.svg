@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 420" role="img" aria-label="Abstract illustration of a camera lens with a lock and a request-to-receipt flow">
+  <defs>
+    <linearGradient id="glow" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0E7C86" stop-opacity="0.25"/>
+      <stop offset="100%" stop-color="#0E7C86" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <!-- Soft glow backdrop -->
+  <circle cx="240" cy="200" r="150" fill="url(#glow)"/>
+
+  <!-- Outer lens body -->
+  <circle cx="240" cy="195" r="108" fill="#162438" stroke="#2B3A52" stroke-width="3"/>
+  <circle cx="240" cy="195" r="92" fill="none" stroke="#0E7C86" stroke-width="3" opacity="0.9"/>
+  <circle cx="240" cy="195" r="72" fill="#0F1B2D" stroke="#334155" stroke-width="2"/>
+  <!-- Aperture blades suggestion -->
+  <circle cx="240" cy="195" r="48" fill="none" stroke="#0E7C86" stroke-width="2.5"/>
+  <circle cx="240" cy="195" r="28" fill="none" stroke="#B8C4D4" stroke-width="1.5" opacity="0.7"/>
+  <circle cx="240" cy="195" r="12" fill="#0E7C86"/>
+
+  <!-- Check badge overlapping lens -->
+  <circle cx="318" cy="268" r="36" fill="#0E7C86"/>
+  <circle cx="318" cy="268" r="30" fill="#0F1B2D" stroke="#5eead4" stroke-width="2"/>
+  <!-- Lock -->
+  <rect x="306" y="266" width="24" height="18" rx="3" fill="#0E7C86"/>
+  <path d="M312 266 V260 C312 255.5 314.5 253 318 253 C321.5 253 324 255.5 324 260 V266" fill="none" stroke="#0E7C86" stroke-width="3" stroke-linecap="round"/>
+  <circle cx="318" cy="273" r="2.2" fill="#0F1B2D"/>
+  <!-- Small check mark next to lock -->
+  <path d="M308 248 L314 254 L328 238" fill="none" stroke="#5eead4" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- Flow: Request → Approval → Receipt -->
+  <!-- Request node -->
+  <rect x="40" y="355" width="100" height="40" rx="8" fill="#162438" stroke="#0E7C86" stroke-width="1.5"/>
+  <text x="90" y="380" text-anchor="middle" fill="#B8C4D4" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="700">Request</text>
+  <!-- Arrow 1 -->
+  <path d="M148 375 H188" stroke="#0E7C86" stroke-width="2" stroke-linecap="round"/>
+  <polygon points="188,370 198,375 188,380" fill="#0E7C86"/>
+  <!-- Approval node -->
+  <rect x="200" y="355" width="100" height="40" rx="8" fill="#162438" stroke="#0E7C86" stroke-width="1.5"/>
+  <text x="250" y="380" text-anchor="middle" fill="#B8C4D4" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="700">Approval</text>
+  <!-- Arrow 2 -->
+  <path d="M308 375 H348" stroke="#0E7C86" stroke-width="2" stroke-linecap="round"/>
+  <polygon points="348,370 358,375 348,380" fill="#0E7C86"/>
+  <!-- Receipt node -->
+  <rect x="360" y="355" width="100" height="40" rx="8" fill="#0E7C86"/>
+  <text x="410" y="380" text-anchor="middle" fill="#FFFFFF" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="700">Receipt</text>
+
+  <!-- Decorative corner ticks -->
+  <path d="M60 60 H90 M60 60 V90" stroke="#2B3A52" stroke-width="2" stroke-linecap="round"/>
+  <path d="M420 60 H390 M420 60 V90" stroke="#2B3A52" stroke-width="2" stroke-linecap="round"/>
+</svg>

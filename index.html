@@ -3,6 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="assets/favicon.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png" sizes="180x180">
 <title>CameraAccessTrust — Proof camera footage was used the right way</title>
 <meta name="description" content="CameraAccessTrust is building an independent, tamper-evident record of every time someone looks at police camera or license-plate data. Video and plates stay with the city; only proof goes public.">
 <style>
@@ -43,7 +46,7 @@
   }
   .nav-inner { display: flex; align-items: center; gap: 20px; padding: 14px 0; flex-wrap: wrap; }
   .logo { font-weight: 700; font-size: 18px; color: var(--white); letter-spacing: 0.02em; }
-  .logo span { color: var(--accent); }
+  .logo .logo-text { color: var(--white); } .logo .logo-text span { color: var(--accent); }
   .nav-links { display: flex; gap: 18px; flex: 1; flex-wrap: wrap; font-size: 14px; }
   .nav-links a { color: var(--onnavy); }
   .nav-links a:hover { color: var(--white); text-decoration: none; }
@@ -272,6 +275,100 @@
   footer a { color: var(--onnavy); }
   .fine { font-size: 12px; color: #7B8A9E; border-top: 1px solid #1f2d44; padding-top: 16px; }
 
+
+  /* Logo mark */
+  .logo { display: inline-flex; align-items: center; gap: 10px; }
+  .logo-mark { width: 28px; height: 28px; flex-shrink: 0; display: block; }
+
+  /* Hero illustration */
+  .hero-art { justify-self: center; max-width: 440px; width: 100%; }
+  .hero-art img { width: 100%; height: auto; display: block; }
+
+  /* How-it-works flow diagram */
+  .flow {
+    display: flex; align-items: stretch; gap: 0; flex-wrap: nowrap;
+  }
+  .flow .step {
+    flex: 1 1 0; min-width: 0; min-height: 280px; width: auto;
+  }
+  .flow-arrow {
+    flex: 0 0 28px; display: flex; align-items: center; justify-content: center;
+    color: var(--accent); padding-top: 0;
+  }
+  .flow-arrow svg { width: 24px; height: 24px; }
+  .step-icon {
+    width: 48px; height: 48px; border-radius: 10px; background: var(--tint);
+    display: flex; align-items: center; justify-content: center; margin-bottom: 12px;
+  }
+  .step-icon svg { width: 28px; height: 28px; }
+
+  /* Receipt card polish */
+  .receipt {
+    background: #FFFEF8; border: 1px solid var(--rule); border-radius: 12px;
+    padding: 0 0 20px; position: relative; overflow: hidden;
+    box-shadow: 0 12px 32px rgba(15,27,45,0.10), 0 1px 0 rgba(15,27,45,0.04);
+  }
+  .receipt:before {
+    content: ""; display: block; height: 10px;
+    background: repeating-linear-gradient(-45deg, var(--accent), var(--accent) 8px, #0a5c64 8px, #0a5c64 16px);
+  }
+  .receipt-top {
+    display: flex; align-items: flex-start; justify-content: space-between;
+    gap: 12px; padding: 16px 20px 4px;
+  }
+  .receipt h3 {
+    color: var(--accent); font-size: 12px; letter-spacing: 0.1em; padding: 0;
+    text-transform: uppercase;
+  }
+  .receipt-verified {
+    flex-shrink: 0; width: 72px; height: 72px;
+  }
+  .receipt dl { padding: 0 20px; }
+  .receipt dt {
+    font-size: 11px; color: var(--muted); margin-top: 14px;
+    text-transform: uppercase; letter-spacing: 0.06em; font-weight: 700;
+  }
+  .receipt dd {
+    font-size: 15px; color: var(--navy); font-weight: 600;
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    border-bottom: 1px dotted var(--rule); padding-bottom: 6px;
+  }
+  .receipt-foot {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 16px; padding: 16px 20px 0; margin-top: 8px; flex-wrap: wrap;
+    border-top: 1px dashed var(--rule); margin-left: 20px; margin-right: 20px;
+  }
+  .receipt-qr {
+    width: 64px; height: 64px; flex-shrink: 0;
+  }
+  .receipt-qr-label {
+    font-size: 10px; color: var(--muted); text-transform: uppercase;
+    letter-spacing: 0.06em; font-weight: 700; margin-top: 4px; text-align: center;
+  }
+  .receipt-example-note { flex: 1; }
+
+  @media (max-width: 900px) {
+    .hero-art { display: none; }
+    .flow {
+      flex-direction: column;
+      gap: 8px;
+      align-items: stretch;
+    }
+    .flow .step {
+      flex: 0 0 auto;
+      width: 100%;
+      min-height: 0;
+    }
+    .flow-arrow {
+      flex: 0 0 auto;
+      width: 100%;
+      height: 28px;
+      padding: 0;
+      transform: none;
+    }
+    .flow-arrow svg { transform: rotate(90deg); }
+  }
+
   @media (max-width: 900px) {
     .hero-grid, .problem-grid, .receipt-grid, .foot-grid { grid-template-columns: 1fr; }
     .steps, .aud, .why, .cta-cards, .privacy-strip, .future { grid-template-columns: 1fr; }
@@ -289,7 +386,7 @@
 
 <header class="nav">
   <div class="wrap nav-inner">
-    <a class="logo" href="#top">Camera<span>Access</span>Trust</a>
+    <a class="logo" href="#top"><img class="logo-mark" src="assets/logo.svg" width="28" height="28" alt="" aria-hidden="true"><span class="logo-text">Camera<span>Access</span>Trust</span></a>
     <nav class="nav-links" aria-label="Primary">
       <a href="#how">How it works</a>
       <a href="#receipt">Receipts</a>
@@ -316,16 +413,8 @@
           <a class="btn btn-ghost" href="#how" style="color:#5eead4!important;border-color:#5eead4">Read how it works</a>
         </div>
       </div>
-      <div class="sheet" aria-hidden="true">
-        <div class="sheet-head">ACCESS SIGN-IN SHEET</div>
-        <div class="sheet-body">
-          <div class="sheet-cols"><div>Who</div><div>When</div><div>Why</div></div>
-          <div class="sheet-row"><span></span><span></span><span></span></div>
-          <div class="sheet-row"><span></span><span></span><span></span></div>
-          <div class="sheet-row"><span></span><span></span><span></span></div>
-          <div class="sheet-row"><span></span><span></span><span></span></div>
-          <div class="seal">SEALED</div>
-        </div>
+      <div class="hero-art">
+        <img src="assets/hero.svg" width="480" height="420" alt="Abstract camera lens with a lock and a request-to-approval-to-receipt flow">
       </div>
     </div>
   </section>
@@ -364,26 +453,33 @@
       <div class="eyebrow">How it works · our planned design</div>
       <h2>Four steps, every time someone looks.</h2>
       <p class="section-lead">Think of a sign-in sheet at a front desk. Ours is designed to do the same for every search of camera or plate data — and the record is kept by someone independent of the camera company.</p>
-      <div class="steps">
-        <article class="step">
+      <div class="flow" role="list">
+        <article class="step" role="listitem">
+          <div class="step-icon" aria-hidden="true"><svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="4" y="3" width="16" height="20" rx="2" stroke="#0E7C86" stroke-width="2"/><path d="M8 9h8M8 13h8M8 17h5" stroke="#0E7C86" stroke-width="1.8" stroke-linecap="round"/><circle cx="22" cy="20" r="5" fill="#E3F2F3" stroke="#0E7C86" stroke-width="1.6"/><path d="M22 17.8v2.4M22 22.2h.01" stroke="#0E7C86" stroke-width="1.6" stroke-linecap="round"/></svg></div>
           <div class="step-num">1</div>
           <h3>Ask</h3>
           <p>Every search starts with a reason.</p>
           <div class="mech">Who (checked digital ID) and a case number or reason become part of the record.</div>
         </article>
-        <article class="step">
+        <div class="flow-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <article class="step" role="listitem">
+          <div class="step-icon" aria-hidden="true"><svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="14" cy="14" r="10" stroke="#0E7C86" stroke-width="2"/><path d="M9 14.2l3.2 3.2L19.2 10" stroke="#0E7C86" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
           <div class="step-num">2</div>
           <h3>Check</h3>
           <p><strong>Every request is checked against the rules, and the result is recorded.</strong></p>
           <div class="mech">Warrant, role, area, state law. Allowed or denied — denials recorded too. We do not claim we always block access before data is shown.</div>
         </article>
-        <article class="step">
+        <div class="flow-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <article class="step" role="listitem">
+          <div class="step-icon" aria-hidden="true"><svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="8" y="13" width="12" height="10" rx="1.5" fill="#0E7C86"/><path d="M11 13V10.5a3 3 0 016 0V13" stroke="#0E7C86" stroke-width="2" stroke-linecap="round"/><circle cx="14" cy="17.5" r="1.4" fill="#0F1B2D"/><path d="M14 18.5v2" stroke="#0F1B2D" stroke-width="1.4" stroke-linecap="round"/></svg></div>
           <div class="step-num">3</div>
           <h3>Seal</h3>
           <p>Seal the record.</p>
           <div class="mech">A digital signature. Change anything and it stops matching.</div>
         </article>
-        <article class="step">
+        <div class="flow-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M4 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        <article class="step" role="listitem">
+          <div class="step-icon" aria-hidden="true"><svg viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 3h14v22l-2.5-1.5L16 25l-2.5-1.5L11 25l-2.5-1.5L6 25V3h1z" stroke="#0E7C86" stroke-width="2" stroke-linejoin="round"/><path d="M10 9h8M10 13h8M10 17h5" stroke="#0E7C86" stroke-width="1.8" stroke-linecap="round"/></svg></div>
           <div class="step-num">4</div>
           <h3>Receipt</h3>
           <p>Post a public receipt.</p>
@@ -399,8 +495,16 @@
       <div class="eyebrow">What a receipt looks like</div>
       <h2>A receipt you can check yourself.</h2>
       <div class="receipt-grid">
-        <div class="receipt">
-          <h3>SAMPLE RECEIPT · NOT LIVE</h3>
+        <div class="receipt" aria-label="Example access receipt, not live">
+          <div class="receipt-top">
+            <h3>SAMPLE RECEIPT · NOT LIVE</h3>
+            <svg class="receipt-verified" viewBox="0 0 72 72" role="img" aria-label="Example verified seal">
+  <circle cx="36" cy="36" r="34" fill="none" stroke="#0E7C86" stroke-width="2" stroke-dasharray="3 2"/>
+  <circle cx="36" cy="36" r="28" fill="#E3F2F3" stroke="#0E7C86" stroke-width="2"/>
+  <path d="M24 37l8 8 16-18" fill="none" stroke="#0E7C86" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="36" y="58" text-anchor="middle" fill="#0E7C86" font-family="Arial,Helvetica,sans-serif" font-size="7" font-weight="700" letter-spacing="0.08em">VERIFIED</text>
+</svg>
+          </div>
           <dl>
             <dt>Agency</dt>
             <dd>Example City Police Department</dd>
@@ -411,7 +515,47 @@
             <dt>Status</dt>
             <dd>Record sealed · Fingerprint posted</dd>
           </dl>
-          <div style="padding:0 20px"><span class="coming">Example only · Receipt checker coming later</span></div>
+          <div class="receipt-foot">
+            <div class="receipt-example-note">
+              <span class="coming">Example only · Receipt checker coming later</span>
+            </div>
+            <div>
+              <svg class="receipt-qr" viewBox="0 0 64 64" aria-hidden="true">
+  <rect width="64" height="64" fill="#FFFEF8" stroke="#CBD5E1" stroke-width="1"/>
+  <!-- finder patterns -->
+  <rect x="4" y="4" width="18" height="18" fill="none" stroke="#0F1B2D" stroke-width="3"/>
+  <rect x="8" y="8" width="10" height="10" fill="#0F1B2D"/>
+  <rect x="42" y="4" width="18" height="18" fill="none" stroke="#0F1B2D" stroke-width="3"/>
+  <rect x="46" y="8" width="10" height="10" fill="#0F1B2D"/>
+  <rect x="4" y="42" width="18" height="18" fill="none" stroke="#0F1B2D" stroke-width="3"/>
+  <rect x="8" y="46" width="10" height="10" fill="#0F1B2D"/>
+  <!-- decorative modules -->
+  <rect x="28" y="6" width="4" height="4" fill="#0F1B2D"/>
+  <rect x="34" y="6" width="4" height="4" fill="#0F1B2D"/>
+  <rect x="28" y="12" width="4" height="4" fill="#64748B"/>
+  <rect x="28" y="28" width="4" height="4" fill="#0F1B2D"/>
+  <rect x="34" y="28" width="4" height="4" fill="#0F1B2D"/>
+  <rect x="40" y="28" width="4" height="4" fill="#64748B"/>
+  <rect x="46" y="28" width="4" height="4" fill="#0F1B2D"/>
+  <rect x="52" y="28" width="4" height="4" fill="#0F1B2D"/>
+  <rect x="28" y="34" width="4" height="4" fill="#64748B"/>
+  <rect x="40" y="34" width="4" height="4" fill="#0F1B2D"/>
+  <rect x="52" y="34" width="4" height="4" fill="#0F1B2D"/>
+  <rect x="28" y="40" width="4" height="4" fill="#0F1B2D"/>
+  <rect x="34" y="40" width="4" height="4" fill="#0F1B2D"/>
+  <rect x="46" y="40" width="4" height="4" fill="#64748B"/>
+  <rect x="28" y="46" width="4" height="4" fill="#0F1B2D"/>
+  <rect x="40" y="46" width="4" height="4" fill="#0F1B2D"/>
+  <rect x="52" y="46" width="4" height="4" fill="#0F1B2D"/>
+  <rect x="28" y="52" width="4" height="4" fill="#64748B"/>
+  <rect x="34" y="52" width="4" height="4" fill="#0F1B2D"/>
+  <rect x="46" y="52" width="4" height="4" fill="#0F1B2D"/>
+  <rect x="52" y="52" width="4" height="4" fill="#64748B"/>
+  <rect x="40" y="52" width="4" height="4" fill="#0F1B2D"/>
+</svg>
+              <div class="receipt-qr-label">Example QR</div>
+            </div>
+          </div>
         </div>
         <div>
           <p class="section-lead">Anyone will be able to check a receipt online, without an account. If it matches the public fingerprint, the record hasn’t been changed since it was posted.</p>
@@ -517,17 +661,17 @@
         <div class="cta-card">
           <h3>Ask about a pilot</h3>
           <p>For city managers, police, city attorneys and IT.</p>
-          <a class="btn" href="mailto:gregg@bigmuttsdevelopment.com?subject=CameraAccessTrust%20pilot">Email Gregg</a>
-          <p style="margin-top:10px;font-size:13px">gregg@bigmuttsdevelopment.com<br><a href="tel:+13364031623">336-403-1623</a></p>
+          <a class="btn" href="mailto:gregg@cameraaccesstrust.com?subject=CameraAccessTrust%20pilot">Email Gregg</a>
+          <p style="margin-top:10px;font-size:13px">gregg@cameraaccesstrust.com<br><a href="tel:+13364031623">336-403-1623</a></p>
         </div>
         <div class="cta-card">
           <h3>Get updates</h3>
           <p>Occasional notes when the public checker or pilots move forward.</p>
-          <a class="btn btn-ghost" href="mailto:gregg@bigmuttsdevelopment.com?subject=CameraAccessTrust%20updates" style="color:#5eead4!important;border-color:#5eead4">Email to get updates</a>
+          <a class="btn btn-ghost" href="mailto:gregg@cameraaccesstrust.com?subject=CameraAccessTrust%20updates" style="color:#5eead4!important;border-color:#5eead4">Email to get updates</a>
         </div>
         <div class="cta-card">
           <h3>Investors</h3>
-          <a class="btn btn-ghost" href="mailto:gregg@bigmuttsdevelopment.com?subject=CameraAccessTrust" style="color:#5eead4!important;border-color:#5eead4">Contact us</a>
+          <a class="btn btn-ghost" href="mailto:gregg@cameraaccesstrust.com?subject=CameraAccessTrust" style="color:#5eead4!important;border-color:#5eead4">Contact us</a>
         </div>
       </div>
     </div>
@@ -556,7 +700,7 @@
       </div>
       <div>
         <strong>Contact</strong>
-        <a href="mailto:gregg@bigmuttsdevelopment.com">gregg@bigmuttsdevelopment.com</a><br>
+        <a href="mailto:gregg@cameraaccesstrust.com">gregg@cameraaccesstrust.com</a><br>
         <a href="tel:+13364031623">336-403-1623</a>
       </div>
       <div>

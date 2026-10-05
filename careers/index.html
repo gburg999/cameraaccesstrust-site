@@ -3,6 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../assets/favicon.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png" sizes="180x180">
 <meta name="robots" content="noindex, nofollow">
 <title>Founding Software Engineer — CameraAccessTrust Careers</title>
 <meta name="description" content="CameraAccessTrust is hiring a Founding Software Engineer (US remote-first) to build privacy-preserving authorization and audit for camera and license-plate data.">
@@ -44,7 +47,7 @@
   }
   .nav-inner { display: flex; align-items: center; gap: 20px; padding: 14px 0; flex-wrap: wrap; }
   .logo { font-weight: 700; font-size: 18px; color: var(--white); letter-spacing: 0.02em; }
-  .logo span { color: var(--accent); }
+  .logo .logo-text { color: var(--white); } .logo .logo-text span { color: var(--accent); }
   .nav-links { display: flex; gap: 18px; flex: 1; flex-wrap: wrap; font-size: 14px; }
   .nav-links a { color: var(--onnavy); }
   .nav-links a:hover { color: var(--white); text-decoration: none; }
@@ -273,6 +276,10 @@
   footer a { color: var(--onnavy); }
   .fine { font-size: 12px; color: #7B8A9E; border-top: 1px solid #1f2d44; padding-top: 16px; }
 
+
+  .logo { display: inline-flex; align-items: center; gap: 10px; }
+  .logo-mark { width: 28px; height: 28px; flex-shrink: 0; display: block; }
+
   @media (max-width: 900px) {
     .hero-grid, .problem-grid, .receipt-grid, .foot-grid { grid-template-columns: 1fr; }
     .steps, .aud, .why, .cta-cards, .privacy-strip, .future { grid-template-columns: 1fr; }
@@ -289,7 +296,7 @@
 <body>
 <header class="nav">
   <div class="wrap nav-inner">
-    <a class="logo" href="/#top">Camera<span>Access</span>Trust</a>
+    <a class="logo" href="/#top"><img class="logo-mark" src="../assets/logo.svg" width="28" height="28" alt="" aria-hidden="true"><span class="logo-text">Camera<span>Access</span>Trust</span></a>
     <nav class="nav-links" aria-label="Primary">
       <a href="/#how">How it works</a>
       <a href="/#receipt">Receipts</a>
@@ -382,7 +389,7 @@
       </div>
       <div>
         <strong>Contact</strong>
-        <a href="mailto:gregg@bigmuttsdevelopment.com">gregg@bigmuttsdevelopment.com</a><br>
+        <a href="mailto:gregg@cameraaccesstrust.com">gregg@cameraaccesstrust.com</a><br>
         <a href="tel:+13364031623">336-403-1623</a>
       </div>
       <div>
