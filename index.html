@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CameraAccessTrust — Proof camera footage was used the right way</title>
+<meta name="description" content="CameraAccessTrust is building an independent, tamper-evident record of every time someone looks at police camera or license-plate data. Video and plates stay with the city; only proof goes public.">
+<style>
+  :root {
+    --navy: #0F1B2D;
+    --ink: #1E293B;
+    --body: #334155;
+    --muted: #64748B;
+    --rule: #CBD5E1;
+    --light: #F1F5F9;
+    --white: #FFFFFF;
+    --accent: #0E7C86;
+    --tint: #E3F2F3;
+    --onnavy: #B8C4D4;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: Arial, Helvetica, sans-serif;
+    color: var(--body);
+    background: var(--white);
+    line-height: 1.45;
+    font-size: 17px;
+  }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
+  .wire-banner {
+    background: #FEF3C7; color: #92400E; font-size: 13px; text-align: center;
+    padding: 8px 16px; border-bottom: 1px solid #F59E0B;
+  }
+
+  /* Nav */
+  .nav {
+    position: sticky; top: 0; z-index: 20;
+    background: rgba(15,27,45,0.96); color: var(--white);
+    border-bottom: 1px solid #1f2d44;
+  }
+  .nav-inner { display: flex; align-items: center; gap: 20px; padding: 14px 0; flex-wrap: wrap; }
+  .logo { font-weight: 700; font-size: 18px; color: var(--white); letter-spacing: 0.02em; }
+  .logo span { color: var(--accent); }
+  .nav-links { display: flex; gap: 18px; flex: 1; flex-wrap: wrap; font-size: 14px; }
+  .nav-links a { color: var(--onnavy); }
+  .nav-links a:hover { color: var(--white); text-decoration: none; }
+  .pill {
+    font-size: 11px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase;
+    border: 1px solid var(--accent); color: var(--accent); padding: 5px 10px; border-radius: 999px;
+  }
+  .btn {
+    display: inline-block; background: var(--accent); color: var(--white) !important;
+    font-weight: 700; font-size: 14px; padding: 11px 18px; border-radius: 6px;
+    text-decoration: none !important; border: none; cursor: pointer;
+  }
+  .btn:hover { filter: brightness(1.08); }
+  .btn-ghost {
+    background: transparent; color: var(--accent) !important;
+    border: 1.5px solid var(--accent);
+  }
+  .btn-light { background: var(--white); color: var(--navy) !important; }
+  .btn-row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 22px; }
+
+  /* Hero */
+  .hero {
+    background: var(--navy); color: var(--white);
+    padding: 72px 0 80px;
+  }
+  .hero-grid { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 48px; align-items: center; }
+  .kicker {
+    color: var(--accent); font-size: 12px; font-weight: 700; letter-spacing: 0.08em;
+    text-transform: uppercase; margin-bottom: 14px;
+  }
+  .hero h1 {
+    font-size: 46px; line-height: 1.08; font-weight: 700; color: var(--white);
+    margin-bottom: 18px;
+  }
+  .hero h1 em { color: var(--accent); font-style: normal; }
+  .hero .lead { font-size: 20px; color: var(--onnavy); max-width: 34em; margin-bottom: 10px; }
+  .hero .support { font-size: 16px; color: var(--muted); max-width: 34em; }
+  .options {
+    margin-top: 28px; padding: 14px 16px; background: #162438; border: 1px dashed #334155;
+    border-radius: 8px; font-size: 13px; color: var(--onnavy);
+  }
+  .options strong { color: var(--white); }
+
+  /* Sign-in sheet card */
+  .sheet {
+    background: var(--white); color: var(--navy); border-radius: 10px;
+    border: 2px solid #1f2d44; overflow: hidden; box-shadow: 0 20px 50px rgba(0,0,0,0.35);
+  }
+  .sheet-head {
+    background: var(--navy); color: var(--white); padding: 14px 18px;
+    font-weight: 700; font-size: 14px; letter-spacing: 0.04em;
+  }
+  .sheet-body { padding: 18px; }
+  .sheet-cols { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; font-weight: 700; font-size: 14px; margin-bottom: 10px; }
+  .sheet-row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-bottom: 10px; }
+  .sheet-row span { height: 12px; background: var(--light); border-radius: 4px; display: block; }
+  .seal {
+    margin: 18px auto 6px; width: 88px; height: 88px; border-radius: 50%;
+    background: var(--accent); color: var(--white); display: flex; align-items: center;
+    justify-content: center; font-weight: 700; font-size: 13px; letter-spacing: 0.06em;
+  }
+
+  section { padding: 72px 0; }
+  section.alt { background: var(--light); }
+  section h2 {
+    font-size: 34px; color: var(--navy); line-height: 1.15; margin-bottom: 14px;
+  }
+  .section-lead { font-size: 19px; color: var(--body); max-width: 40em; margin-bottom: 28px; }
+  .eyebrow {
+    color: var(--accent); font-size: 12px; font-weight: 700; letter-spacing: 0.08em;
+    text-transform: uppercase; margin-bottom: 10px;
+  }
+
+  /* Problem */
+  .problem-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 36px; align-items: start; }
+  .log-card {
+    background: var(--navy); color: var(--white); border-radius: 10px; padding: 24px;
+    min-height: 220px; position: relative;
+  }
+  .log-card h3 { font-size: 18px; margin-bottom: 14px; }
+  .log-lines span { display: block; height: 10px; background: #2B3A52; border-radius: 3px; margin-bottom: 10px; }
+  .lock {
+    position: absolute; right: 20px; bottom: 18px; width: 36px; height: 28px;
+    border-radius: 6px; background: var(--accent);
+  }
+  .lock:before {
+    content: ""; position: absolute; left: 8px; top: -14px; width: 16px; height: 16px;
+    border: 3px solid var(--accent); border-bottom: none; border-radius: 10px 10px 0 0; background: transparent;
+  }
+  .lock:after {
+    content: ""; position: absolute; left: 15px; top: 8px; width: 6px; height: 6px;
+    border-radius: 50%; background: var(--navy);
+  }
+  .askers { display: flex; gap: 12px; flex-wrap: wrap; margin: 18px 0; }
+  .asker {
+    flex: 1; min-width: 120px; background: var(--white); border: 1px solid var(--rule);
+    border-radius: 8px; padding: 16px; text-align: center; color: var(--navy); font-weight: 700;
+  }
+  .bubble {
+    display: inline-block; background: var(--tint); color: var(--navy); padding: 10px 14px;
+    border-radius: 8px; font-style: italic; margin-right: 8px; margin-bottom: 8px;
+  }
+  .bubble.reply { background: var(--accent); color: var(--white); font-style: italic; font-weight: 700; }
+  .callout {
+    margin-top: 20px; padding: 14px 16px; border-left: 4px solid var(--accent);
+    background: var(--tint); font-size: 15px; color: var(--body);
+  }
+  .src { font-size: 12px; color: var(--muted); margin-top: 8px; }
+
+  /* Steps */
+  .steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+  .step {
+    background: var(--white); border: 1px solid var(--rule); border-radius: 10px;
+    padding: 22px 18px; min-height: 260px; display: flex; flex-direction: column;
+  }
+  .step-num {
+    width: 36px; height: 36px; border-radius: 50%; background: var(--tint); color: var(--accent);
+    font-weight: 700; display: flex; align-items: center; justify-content: center; margin-bottom: 14px;
+  }
+  .step h3 { color: var(--navy); font-size: 20px; margin-bottom: 8px; }
+  .step p { font-size: 15px; color: var(--body); }
+  .step .mech {
+    margin-top: auto; padding-top: 12px; border-top: 1px dashed var(--rule);
+    font-size: 13px; color: var(--muted);
+  }
+  .close-line {
+    margin-top: 28px; text-align: center; font-size: 20px; font-weight: 700; color: var(--accent);
+  }
+
+  /* Receipt */
+  .receipt-grid { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 36px; align-items: start; }
+  .receipt {
+    background: var(--white); border: 2px solid var(--navy); border-radius: 8px;
+    padding: 0 0 18px; position: relative; overflow: hidden;
+  }
+  .receipt:before { content: ""; display: block; height: 8px; background: var(--accent); }
+  .receipt h3 {
+    color: var(--accent); font-size: 13px; letter-spacing: 0.08em; padding: 16px 20px 8px;
+  }
+  .receipt dl { padding: 0 20px; }
+  .receipt dt { font-size: 12px; color: var(--muted); margin-top: 12px; }
+  .receipt dd { font-size: 18px; color: var(--navy); font-weight: 700; }
+  .tbd {
+    display: inline-block; background: #FEF3C7; color: #92400E; border: 1px dashed #F59E0B;
+    font-size: 13px; font-weight: 700; padding: 2px 8px; border-radius: 4px;
+  }
+  .coming {
+    display: inline-block; margin-top: 12px; background: var(--light); color: var(--muted);
+    border: 1px dashed var(--muted); font-size: 12px; font-weight: 700; padding: 6px 10px; border-radius: 999px;
+  }
+  .privacy-strip {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 28px;
+  }
+  .privacy-strip div {
+    background: var(--white); border: 1px solid var(--rule); border-radius: 8px; padding: 16px;
+  }
+  .privacy-strip strong { display: block; color: var(--navy); margin-bottom: 6px; }
+
+  /* Audiences */
+  .aud { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .aud article {
+    background: var(--white); border-top: 4px solid var(--accent); border-radius: 0 0 10px 10px;
+    padding: 24px; box-shadow: 0 1px 0 var(--rule);
+  }
+  .aud h3 { color: var(--navy); font-size: 22px; margin-bottom: 10px; }
+  .aud p { font-size: 15px; }
+
+  /* Why now */
+  .why { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .why article {
+    background: var(--white); border-radius: 10px; padding: 22px; border: 1px solid var(--rule);
+  }
+  .badge {
+    display: inline-block; background: var(--navy); color: var(--white); font-weight: 700;
+    padding: 8px 12px; border-radius: 8px; margin-bottom: 14px; font-size: 14px;
+  }
+  .why h3 { color: var(--navy); font-size: 18px; margin-bottom: 8px; }
+  .why p { font-size: 15px; }
+  .disclaimer {
+    margin-top: 20px; font-size: 13px; color: var(--muted); font-style: italic;
+  }
+
+  /* FAQ */
+  .faq details {
+    background: var(--white); border: 1px solid var(--rule); border-radius: 8px;
+    padding: 16px 18px; margin-bottom: 10px;
+  }
+  .faq summary {
+    font-weight: 700; color: var(--navy); cursor: pointer; list-style: none;
+  }
+  .faq summary::-webkit-details-marker { display: none; }
+  .faq details[open] summary { margin-bottom: 10px; color: var(--accent); }
+  .faq p { font-size: 15px; color: var(--body); }
+
+  /* CTA */
+  .cta {
+    background: var(--navy); color: var(--white); padding: 64px 0;
+  }
+  .cta h2 { color: var(--white); font-size: 32px; margin-bottom: 10px; }
+  .cta p { color: var(--onnavy); max-width: 36em; margin-bottom: 22px; }
+  .cta-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+  .cta-card {
+    background: #162438; border: 1px solid #2B3A52; border-radius: 10px; padding: 20px;
+  }
+  .cta-card h3 { color: var(--white); font-size: 18px; margin-bottom: 8px; }
+  .cta-card p { color: var(--onnavy); font-size: 14px; margin-bottom: 14px; }
+  .flag {
+    display: inline-block; margin-top: 8px; font-size: 11px; font-weight: 700;
+    letter-spacing: 0.04em; text-transform: uppercase; color: #FBBF24;
+  }
+
+  /* Future */
+  .future { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  .future div {
+    border: 1.5px dashed var(--muted); border-radius: 10px; padding: 18px; background: var(--white);
+    color: var(--muted);
+  }
+  .future strong { display: block; color: var(--navy); margin-bottom: 6px; }
+
+  /* Footer */
+  footer {
+    background: #0A1220; color: var(--onnavy); padding: 40px 0 28px; font-size: 14px;
+  }
+  .foot-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 24px; margin-bottom: 24px; }
+  footer strong { color: var(--white); display: block; margin-bottom: 8px; }
+  footer a { color: var(--onnavy); }
+  .fine { font-size: 12px; color: #7B8A9E; border-top: 1px solid #1f2d44; padding-top: 16px; }
+
+  @media (max-width: 900px) {
+    .hero-grid, .problem-grid, .receipt-grid, .foot-grid { grid-template-columns: 1fr; }
+    .steps, .aud, .why, .cta-cards, .privacy-strip, .future { grid-template-columns: 1fr; }
+    .hero h1 { font-size: 34px; }
+    section { padding: 48px 0; }
+    .nav-links { display: none; }
+    .nav-inner { gap: 10px; }
+    .pill { order: 3; }
+    .btn { width: 100%; text-align: center; }
+    .btn-row .btn, .btn-row .btn-ghost { width: auto; }
+  }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a class="logo" href="#top">Camera<span>Access</span>Trust</a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="#how">How it works</a>
+      <a href="#receipt">Receipts</a>
+      <a href="#who">Who it’s for</a>
+      <a href="#why">Why it matters</a>
+      <a href="#faq">FAQ</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <span class="pill">Patent pending</span>
+    <a class="btn" href="#contact">Ask about a pilot</a>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <div class="kicker">Independent records for camera and license-plate data</div>
+        <h1>Proof that camera footage was used the <em>right way</em>.</h1>
+        <p class="lead">We’re building an independent record of every time someone looks at police camera or license-plate data. Cities will be able to show it to anyone, and it’s designed so no one can secretly change it.</p>
+        <p class="support">Designed so video and plate data stay with the city. Only proof goes public.</p>
+        <div class="btn-row">
+          <a class="btn btn-light" href="#contact">Ask about a pilot</a>
+          <a class="btn btn-ghost" href="#how" style="color:#5eead4!important;border-color:#5eead4">Read how it works</a>
+        </div>
+      </div>
+      <div class="sheet" aria-hidden="true">
+        <div class="sheet-head">ACCESS SIGN-IN SHEET</div>
+        <div class="sheet-body">
+          <div class="sheet-cols"><div>Who</div><div>When</div><div>Why</div></div>
+          <div class="sheet-row"><span></span><span></span><span></span></div>
+          <div class="sheet-row"><span></span><span></span><span></span></div>
+          <div class="sheet-row"><span></span><span></span><span></span></div>
+          <div class="sheet-row"><span></span><span></span><span></span></div>
+          <div class="seal">SEALED</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="problem">
+    <div class="wrap">
+      <div class="eyebrow">The problem</div>
+      <h2>Today, the answer to “who looked?” often comes from the camera company’s own log.</h2>
+      <div class="problem-grid">
+        <div class="log-card">
+          <h3>THE VENDOR’S LOG</h3>
+          <div class="log-lines"><span style="width:90%"></span><span style="width:70%"></span><span style="width:80%"></span><span style="width:55%"></span><span style="width:75%"></span></div>
+          <div class="lock" aria-hidden="true"></div>
+          <p style="margin-top:28px;color:#B8C4D4;font-size:14px">Camera company</p>
+        </div>
+        <div>
+          <p class="section-lead" style="margin-bottom:16px">When a council, court or resident asks whether a search was allowed, the only answer often comes from the camera company’s own log. That is the company checking its own homework.</p>
+          <div class="askers">
+            <div class="asker">Council</div>
+            <div class="asker">Court</div>
+            <div class="asker">Public</div>
+          </div>
+          <div class="bubble">“Was this allowed?”</div>
+          <div class="bubble reply">“Trust our log.”</div>
+          <div class="callout">
+            Flock, the largest U.S. license-plate camera company, says more than 1,500 agencies have published a Flock Transparency Portal.
+            <div class="src">Source: Flock Safety (Garrett Langley), “<a href="https://www.flocksafety.com/blog/flock-guardrails-address-lpr-privacy-concerns-and-police-transparency">Flock Updates Privacy, Accountability, Security, and Transparency Safeguards</a>,” Aug 13, 2026 (“More than 1,500 agencies have published a Flock Transparency Portal”). Also reported by <a href="https://www.officer.com/command-hq/technology/traffic/lpr-license-plate-recognition/news/55397956/flock-safety-announces-7-day-data-retention-policy-for-alpr-cameras">Officer.com</a>, Aug 13, 2026. Figure is Flock’s own claim.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="alt" id="how">
+    <div class="wrap">
+      <div class="eyebrow">How it works · our planned design</div>
+      <h2>Four steps, every time someone looks.</h2>
+      <p class="section-lead">Think of a sign-in sheet at a front desk. Ours is designed to do the same for every search of camera or plate data — and the record is kept by someone independent of the camera company.</p>
+      <div class="steps">
+        <article class="step">
+          <div class="step-num">1</div>
+          <h3>Ask</h3>
+          <p>Every search starts with a reason.</p>
+          <div class="mech">Who (checked digital ID) and a case number or reason become part of the record.</div>
+        </article>
+        <article class="step">
+          <div class="step-num">2</div>
+          <h3>Check</h3>
+          <p><strong>Every request is checked against the rules, and the result is recorded.</strong></p>
+          <div class="mech">Warrant, role, area, state law. Allowed or denied — denials recorded too. We do not claim we always block access before data is shown.</div>
+        </article>
+        <article class="step">
+          <div class="step-num">3</div>
+          <h3>Seal</h3>
+          <p>Seal the record.</p>
+          <div class="mech">A digital signature. Change anything and it stops matching.</div>
+        </article>
+        <article class="step">
+          <div class="step-num">4</div>
+          <h3>Receipt</h3>
+          <p>Post a public receipt.</p>
+          <div class="mech">A short summary + a fingerprint on a public ledger. Never video, names or plates.</div>
+        </article>
+      </div>
+      <p class="close-line">Any change would show. Video stays private.</p>
+    </div>
+  </section>
+
+  <section id="receipt">
+    <div class="wrap">
+      <div class="eyebrow">What a receipt looks like</div>
+      <h2>A receipt you can check yourself.</h2>
+      <div class="receipt-grid">
+        <div class="receipt">
+          <h3>SAMPLE RECEIPT · NOT LIVE</h3>
+          <dl>
+            <dt>Agency</dt>
+            <dd>Example City Police Department</dd>
+            <dt>Time window</dt>
+            <dd>Oct 5, 2026 · afternoon</dd>
+            <dt>Purpose</dt>
+            <dd>Active investigation (case number on file)</dd>
+            <dt>Status</dt>
+            <dd>Record sealed · Fingerprint posted</dd>
+          </dl>
+          <div style="padding:0 20px"><span class="coming">Example only · Receipt checker coming later</span></div>
+        </div>
+        <div>
+          <p class="section-lead">Anyone will be able to check a receipt online, without an account. If it matches the public fingerprint, the record hasn’t been changed since it was posted.</p>
+          <p>You don’t have to take the camera company’s word for it — or ours.</p>
+          <div class="privacy-strip">
+            <div><strong>City’s storage</strong>Video &amp; plate data, with the city’s keys</div>
+            <div><strong>CameraAccessTrust</strong>Full sealed records for the city &amp; approved auditors</div>
+            <div><strong>Public ledger</strong>Fingerprints only — no names, plates or video</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="alt" id="who">
+    <div class="wrap">
+      <div class="eyebrow">Who it’s for</div>
+      <h2>Built for the people who ask hard questions.</h2>
+      <div class="aud">
+        <article>
+          <h3>Public</h3>
+          <p>Residents, council members and journalists who want short receipts they can eventually look up without trusting the vendor.</p>
+        </article>
+        <article>
+          <h3>Agencies</h3>
+          <p>Cities and police departments that need to show proper use, not just claim it. First focus: places with tighter camera rules — WA, CT, MN, NM, KY. <em>Not a list of customers.</em></p>
+        </article>
+        <article>
+          <h3>Companies</h3>
+          <p>Campuses, ports, parking and security firms that run plate cameras. A later focus.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="why">
+    <div class="wrap">
+      <div class="eyebrow">Why it matters</div>
+      <h2>The rules are getting tighter.</h2>
+      <p class="section-lead">Cities increasingly need to show proper use of camera and plate data. A few sourced facts:</p>
+      <div class="why">
+        <article>
+          <span class="badge">MN</span>
+          <h3>Audits required since 2015</h3>
+          <p>Minnesota has required independent audits every two years since 2015, and a documented reason or case number for each search (Minn. Stat. § 13.824).</p>
+          <div class="src">Source: Minn. Stat. § 13.824, subd. 6 and 7.</div>
+        </article>
+        <article>
+          <span class="badge">WA · CT · NM · KY</span>
+          <h3>New camera limits in 2026</h3>
+          <p>Washington, Connecticut, New Mexico and Kentucky passed new license-plate camera limits in 2026.</p>
+          <div class="src">Source: MultiState, Sep 23 2026.</div>
+        </article>
+        <article>
+          <span class="badge">57</span>
+          <h3>Councils cancelling over trust</h3>
+          <p>Stateline counted 57 cancellations or rejections in 2026 by mid-August. Examples: Appleton WI; Plymouth MN; Tempe and Cave Creek AZ.</p>
+          <div class="src">Sources: Stateline, Aug 14 2026; Post-Crescent, May 6 2026; MPR News; Arizona Republic, Aug 26 2026.</div>
+        </article>
+      </div>
+      <p class="disclaimer">Not legal advice. Also flagged for lawyers: driver-privacy, public-records, evidence and data-sharing rules.</p>
+    </div>
+  </section>
+
+  <section class="alt" id="faq">
+    <div class="wrap">
+      <div class="eyebrow">FAQ</div>
+      <h2>Straight answers.</h2>
+      <div class="faq">
+        <details open>
+          <summary>Does this put video or license plates on the internet?</summary>
+          <p>No. It’s designed so video and plate data stay in the city’s own storage. Public receipts and ledger fingerprints never include names, plates or video.</p>
+        </details>
+        <details>
+          <summary>Who can see the full record?</summary>
+          <p>The city and approved auditors (for a set period). The design gives no one a single master key.</p>
+        </details>
+        <details>
+          <summary>Do you stop an officer from looking?</summary>
+          <p>In our design, every request is checked against the rules, and the result (allowed or denied) is recorded. Denied requests are recorded too. We do not claim on this page that we always block access before data is shown.</p>
+        </details>
+        <details>
+          <summary>Is this live in my city?</summary>
+          <p>Not yet. CameraAccessTrust is in development. If you represent an agency, ask about a pilot.</p>
+        </details>
+        <details>
+          <summary>What does “patent pending” mean?</summary>
+          <p>A U.S. provisional patent application was filed in October 2026. We do not publish the application number on this site.</p>
+        </details>
+        <details>
+          <summary>Are you related to Flock Safety?</summary>
+          <p>No. We are independent of camera vendors. We plan to connect across brands — Flock first, then others.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section class="cta" id="contact">
+    <div class="wrap">
+      <h2>Next step.</h2>
+      <p>Tell us how you’d like to talk.</p>
+      <div class="cta-cards">
+        <div class="cta-card">
+          <h3>Ask about a pilot</h3>
+          <p>For city managers, police, city attorneys and IT.</p>
+          <a class="btn" href="mailto:gregg@bigmuttsdevelopment.com?subject=CameraAccessTrust%20pilot">Email Gregg</a>
+          <p style="margin-top:10px;font-size:13px">gregg@bigmuttsdevelopment.com<br><a href="tel:+13364031623">336-403-1623</a></p>
+        </div>
+        <div class="cta-card">
+          <h3>Get updates</h3>
+          <p>Occasional notes when the public checker or pilots move forward.</p>
+          <a class="btn btn-ghost" href="mailto:gregg@bigmuttsdevelopment.com?subject=CameraAccessTrust%20updates" style="color:#5eead4!important;border-color:#5eead4">Email to get updates</a>
+        </div>
+        <div class="cta-card">
+          <h3>Investors</h3>
+          <a class="btn btn-ghost" href="mailto:gregg@bigmuttsdevelopment.com?subject=CameraAccessTrust" style="color:#5eead4!important;border-color:#5eead4">Contact us</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="future">
+    <div class="wrap">
+      <div class="eyebrow">Future portal</div>
+      <h2>Coming later.</h2>
+      <div class="future">
+        <div><strong>Receipt lookup</strong>Free public checker in a browser, no account.</div>
+        <div><strong>Agency directory</strong>Which agencies publish receipts.</div>
+        <div><strong>Transparency reports</strong>Periodic public summaries.</div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <strong>CameraAccessTrust, Inc.</strong>
+        Delaware C-corp · Sponsored by Big Mutts Development, LLC<br>
+        Patent pending · © 2026 CameraAccessTrust, Inc.
+      </div>
+      <div>
+        <strong>Contact</strong>
+        <a href="mailto:gregg@bigmuttsdevelopment.com">gregg@bigmuttsdevelopment.com</a><br>
+        <a href="tel:+13364031623">336-403-1623</a>
+      </div>
+      <div>
+        <strong>Site</strong>
+        <a href="#how">How it works</a> ·
+        <a href="#faq">FAQ</a> ·
+        <a href="#contact">Contact</a>
+      </div>
+    </div>
+    <p class="fine">Educational site. Not legal advice. Not an offer to sell, or a request to buy, any security.</p>
+  </div>
+</footer>
+</body>
+</html>
